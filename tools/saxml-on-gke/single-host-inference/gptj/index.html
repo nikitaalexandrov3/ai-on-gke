@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../../img/favicon.ico">
+        <title>Serve a LLM using a single-host TPU on GKE with Saxml - ai-on-gke</title>
+        <link href="../../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../../..">ai-on-gke</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../../.." class="nav-link">AI on GKE Assets</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../../LICENSE/" class="nav-link">LICENSE</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../../contributing/" class="nav-link">How to Contribute</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Applications</a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jupyter</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../applications/jupyter/" class="dropdown-item">JupyterHub on GKE</a>
+</li>
+            
+<li>
+    <a href="../../../../applications/jupyter/profiles/" class="dropdown-item">JupyterHub Profiles</a>
+</li>
+            
+<li>
+    <a href="../../../../applications/jupyter/storage/" class="dropdown-item">Persistent Storage</a>
+</li>
+            
+<li>
+    <a href="../../../../applications/jupyter/variable_definitions/" class="dropdown-item">Glossary for variables</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Rag</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../applications/rag/" class="dropdown-item">RAG on GKE</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Frontend</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../applications/rag/frontend/" class="dropdown-item">RAG-on-GKE Frontend Webserver</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Container</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../applications/rag/frontend/container/" class="dropdown-item">Frontend Container</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Ray</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../applications/ray/" class="dropdown-item">Ray on GKE Templates</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Tfvars examples</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../applications/ray/tfvars_examples/" class="dropdown-item">Example terraform variables for Ray clusters</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Benchmarks</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../../benchmarks/" class="dropdown-item">AI on GKE Benchmarking</a>
+</li>
+                                    
+<li>
+    <a href="../../../../benchmarks/65k-cpu-nodes-simulated-ai-benchmark/" class="dropdown-item">65k GKE CPU Benchmarks - Simulated AI Benchmark</a>
+</li>
+                                    
+<li>
+    <a href="../../../../benchmarks/accelerator-based-ai-benchmark/" class="dropdown-item">AI on GKE Accelerator-Based Benchmarking</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Benchmark</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../benchmarks/benchmark/" class="dropdown-item">Index</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dataset</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../benchmarks/benchmark/dataset/" class="dropdown-item">Index</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">ShareGPT v3 unflitered cleaned split</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../benchmarks/benchmark/dataset/ShareGPT_v3_unflitered_cleaned_split/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Tools</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../benchmarks/benchmark/tools/" class="dropdown-item">Index</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dlio</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../benchmarks/benchmark/tools/dlio/" class="dropdown-item">Benchmark on GKE</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Locust load inference</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../benchmarks/benchmark/tools/locust-load-inference/" class="dropdown-item">AI on GKE Benchmark Locust</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Locust custom exporter</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../benchmarks/benchmark/tools/locust-load-inference/locust-custom-exporter/" class="dropdown-item">Locust Exporter</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Model load benchmark</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../benchmarks/benchmark/tools/model-load-benchmark/" class="dropdown-item">Benchmarker CLI</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Profile generator</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../benchmarks/benchmark/tools/profile-generator/" class="dropdown-item">AI on GKE Benchmark Latency Profile Generator</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Inference server</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../benchmarks/inference-server/" class="dropdown-item">Index</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jetstream</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../benchmarks/inference-server/jetstream/" class="dropdown-item">AI on GKE Benchmarking for JetStream</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Text generation inference</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../benchmarks/inference-server/text-generation-inference/" class="dropdown-item">AI on GKE Benchmark TGI Server</a>
+</li>
+            
+<li>
+    <a href="../../../../benchmarks/inference-server/text-generation-inference/autoscaling/" class="dropdown-item">Autoscaling TGI</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Triton</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../benchmarks/inference-server/triton/" class="dropdown-item">AI on GKE: Benchmark TensorRT LLM on Triton Server</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Vllm</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../benchmarks/inference-server/vllm/" class="dropdown-item">Benchmark vLLM on GKE</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Infra</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Accelerator cluster</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../benchmarks/infra/accelerator-cluster/" class="dropdown-item">Index</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Stage 1</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../benchmarks/infra/accelerator-cluster/stage-1/" class="dropdown-item">AI on GKE Benchmark Infrastructure</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Modules</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gke infra</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../benchmarks/infra/accelerator-cluster/stage-1/modules/gke-infra/" class="dropdown-item">AI on GKE Benchmark Framework Infrastructure</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Stage 2</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../benchmarks/infra/accelerator-cluster/stage-2/" class="dropdown-item">AI on GKE Benchmark Infrastructure</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Orchestration</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../benchmarks/orchestration/" class="dropdown-item">AI on GKE Benchmark Framework Orchestration</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Best practices</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../../best-practices/" class="dropdown-item">Best Practices</a>
+</li>
+                                    
+<li>
+    <a href="../../../../best-practices/startup-latency/" class="dropdown-item">Startup latency</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gke batch refarch</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../best-practices/gke-batch-refarch/" class="dropdown-item">Reference Architecture: Batch Processing Platform on GKE</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Ml platform</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../best-practices/ml-platform/" class="dropdown-item">Moved to the GoogleCloudPlatform/accelerated-platforms repository which is included as a submodule in the /best-practices folder</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Gke batch refarch</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../../gke-batch-refarch/" class="dropdown-item">Moved to best-practices/gke-batch-refarch</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Infrastructure</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../../infrastructure/" class="dropdown-item">Setup Infra</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Jupyter on gke</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../../jupyter-on-gke/" class="dropdown-item">JupyterHub on GKE</a>
+</li>
+                                    
+<li>
+    <a href="../../../../jupyter-on-gke/profiles/" class="dropdown-item">JupyterHub Profiles</a>
+</li>
+                                    
+<li>
+    <a href="../../../../jupyter-on-gke/storage/" class="dropdown-item">Persistent Storage</a>
+</li>
+                                    
+<li>
+    <a href="../../../../jupyter-on-gke/variable_definitions/" class="dropdown-item">Glossary for variables</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Modules</a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Cloudsql</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../modules/cloudsql/" class="dropdown-item">CloudSQL</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Custom metrics stackdriver adapter</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../modules/custom-metrics-stackdriver-adapter/" class="dropdown-item">Custom Metrics Stackdriver Adapter</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gcs</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../modules/gcs/" class="dropdown-item">GCS bucket used in the RAG on GKE demo</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gke autopilot private cluster</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../modules/gke-autopilot-private-cluster/" class="dropdown-item">GKE Private Autopilot Cluster</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gke autopilot public cluster</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../modules/gke-autopilot-public-cluster/" class="dropdown-item">GKE Public Autopilot Cluster</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gke standard private cluster</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../modules/gke-standard-private-cluster/" class="dropdown-item">GKE Private Standard Cluster</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gke standard public cluster</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../modules/gke-standard-public-cluster/" class="dropdown-item">GKE Public Standard Cluster</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jetstream maxtext deployment</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../modules/jetstream-maxtext-deployment/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jupyter</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jupyter image</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Notebook image</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../modules/jupyter/jupyter_image/notebook_image/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Prometheus adapter</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../modules/prometheus-adapter/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Ray on gke</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../../ray-on-gke/" class="dropdown-item">Ray on GKE</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Guides</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Observability</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../ray-on-gke/guides/observability/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Raytrain with gcsfusecsi</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../ray-on-gke/guides/raytrain-with-gcsfusecsi/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Tpu</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../ray-on-gke/guides/tpu/" class="dropdown-item">TPU User Guide</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Tpu</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Kuberay tpu webhook</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../ray-on-gke/tpu/kuberay-tpu-webhook/" class="dropdown-item">Index</a>
+</li>
+            
+<li>
+    <a href="../../../../ray-on-gke/tpu/kuberay-tpu-webhook/Troubleshooting/" class="dropdown-item">Ray TPU Webhook Troubleshooting / FAQ Guide</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Slurm on gke</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../../slurm-on-gke/" class="dropdown-item">Slurm on GKE</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Tools</a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dcgm on gke</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Grafana</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Proxy</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../dcgm-on-gke/grafana/proxy/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gke disk image builder</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../gke-disk-image-builder/" class="dropdown-item">GKE Disk Image Builder</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Saxml on gke</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Httpserver</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../httpserver/" class="dropdown-item">Inferencing using Saxml and an HTTP Server</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Single host inference</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gptj</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Serve a LLM using a single-host TPU on GKE with Saxml</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Tpu provisioner</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../../tpu-provisioner/" class="dropdown-item">TPU Provisioner</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Admission controller</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tpu-provisioner/admission_controller/" class="dropdown-item">TPU Provisioner Admission Controller</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Certificates</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tpu-provisioner/admission_controller/certificates/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Internal</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Auth</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gcp</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tpu-provisioner/internal/auth/gcp/" class="dropdown-item">GCP Auth (v1.26+)</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Tutorials and examples</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../../tutorials-and-examples/cloudshell-tutorial/" class="dropdown-item">Cloudshell tutorial</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">genAI LLM</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">deploying mistral 7b instruct L4gpus</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/genAI-LLM/deploying-mistral-7b-instruct-L4gpus/" class="dropdown-item">Guide to Serving Mistral 7B-Instruct v0.1 on GKE Utilizing Nvidia L4-GPUs</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">deploying mixtral 8x7b instruct L4 gpus</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/genAI-LLM/deploying-mixtral-8x7b-instruct-L4-gpus/" class="dropdown-item">Guide to Serving Mixtral 8x7 Model on GKE Utilizing Nvidia L4-GPUs</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">E2e genai langchain app</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/genAI-LLM/e2e-genai-langchain-app/" class="dropdown-item">E2E GenAI application with Langchain, Ray, Flask API backend, React frontend</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Finetuning gemma 2b on l4</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/genAI-LLM/finetuning-gemma-2b-on-l4/" class="dropdown-item">Tutorial: Finetuning Gemma 2b on GKE using L4 GPUs</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Finetuning llama 7b on l4</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/genAI-LLM/finetuning-llama-7b-on-l4/" class="dropdown-item">Tutorial: Finetuning Llama 7b on GKE using L4 GPUs</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Serving llama2 70b on l4 gpus</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/genAI-LLM/serving-llama2-70b-on-l4-gpus/" class="dropdown-item">Tutorial: Serving Llama 2 70b on GKE L4 GPUs</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gpu examples</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">A100 jax</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/gpu-examples/a100-jax/" class="dropdown-item">JAX 'Hello World' on GKE + A100-80GB</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Online serving single gpu</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/gpu-examples/online-serving-single-gpu/" class="dropdown-item">Serve a model with a GPU on GKE Autopilot</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Training single gpu</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/gpu-examples/training-single-gpu/" class="dropdown-item">Train a model with GPUs on GKE Standard mode</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Hf tgi</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/hf-tgi/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Inference servers</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Checkpoints</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/inference-servers/checkpoints/" class="dropdown-item">Checkpoint conversion</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jetstream</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Maxtext</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Single host inference</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/inference-servers/jetstream/maxtext/single-host-inference/" class="dropdown-item">Serve a LLM using a single-host TPU on GKE with JetStream and MaxText</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Pytorch</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Single host inference</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/inference-servers/jetstream/pytorch/single-host-inference/" class="dropdown-item">Serve a LLM using a single-host TPU on GKE with JetStream and PyTorch/XLA</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Maxdiffusion</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/inference-servers/maxdiffusion/" class="dropdown-item">High-performance diffusion model inference on GKE and TPU using MaxDiffusion</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Kserve</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/kserve/" class="dropdown-item">KServe on GKE Autopilot</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Models as oci</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/models-as-oci/" class="dropdown-item">Package and Deploy from Hugging Face to Artifact Registry and GKE</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Nvidia nim</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/nvidia-nim/" class="dropdown-item">NVIDIA NIM on GKE</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Skypilot</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/skypilot/" class="dropdown-item">GKE cross region capacity chasing with SkyPilot</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Text classification</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/skypilot/text-classification/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Storage</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Hyperdisk ml</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/storage/hyperdisk-ml/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Tpu examples</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Single host inference</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jax</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Stable diffusion</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/tpu-examples/single-host-inference/jax/stable-diffusion/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Training</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Mnist single tpu</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/tpu-examples/training/mnist-single-tpu/" class="dropdown-item">Train a model with TPUs on GKE Standard mode</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Vector databases</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/vector-databases/readme/" class="dropdown-item">Vector Database Repo</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">NEXT 2024 Weaviate Demo</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/vector-databases/NEXT-2024-Weaviate-Demo/" class="dropdown-item">From RAG to autonomous apps with Weaviate and Gemini on Google Kubernetes Engine</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Demo website</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/vector-databases/NEXT-2024-Weaviate-Demo/demo-website/" class="dropdown-item">Demo website for Generative Feedback Loops</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Workflow orchestration</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dws examples</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/workflow-orchestration/dws-examples/" class="dropdown-item">Dynamic Workload Scheduler examples</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Indexed job</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/workflow-orchestration/indexed-job/" class="dropdown-item">Running distributed ML training workloads on GKE using Indexed Jobs</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jobset</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Pytorch</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/workflow-orchestration/jobset/pytorch/" class="dropdown-item">Running distributed ML training workloads on GKE using the JobSet API</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../../httpserver/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../../../../tpu-provisioner/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#serve-a-llm-using-a-single-host-tpu-on-gke-with-saxml" class="nav-link">Serve a LLM using a single-host TPU on GKE with Saxml</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#background" class="nav-link">Background</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#setup" class="nav-link">Setup</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#deploy-saxml-admin-server-model-server-and-http-server" class="nav-link">Deploy Saxml Admin Server, Model Server, and HTTP server</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#convert-checkpoint-for-model" class="nav-link">Convert Checkpoint for Model</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#use-saxml" class="nav-link">Use Saxml</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#clean-up" class="nav-link">Clean Up</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#next-up" class="nav-link">Next up</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="serve-a-llm-using-a-single-host-tpu-on-gke-with-saxml">Serve a LLM using a single-host TPU on GKE with Saxml</h1>
+<h2 id="background">Background</h2>
+<p>This tutorial shows you how to serve a large language model (LLM) using Tensor Processing Units (TPUs) on Google Kubernetes Engine (GKE) with <a href="https://github.com/google/saxml#saxml-aka-sax">Saxml</a>. Saxml is an experimental system that serves <a href="https://github.com/google/paxml">Paxml</a>, <a href="https://github.com/google/jax">JAX</a>, and <a href="https://pytorch.org/">PyTorch</a> models for inference. The model you use in this guide is the <a href="https://github.com/mlcommons/inference/blob/master/language/gpt-j/README.md#download-gpt-j-model">GPT-J model</a>.</p>
+<p>Single-host model serving is applicable to single-host TPU slice, that is, v5litepod-1, v5litepod-4 and v5litepod-8. You can learn more about <a href="https://cloud.devsite.corp.google.com/kubernetes-engine/docs/concepts/tpus">TPUs in GKE</a>. </p>
+<p>Single-host model serving is applicable to single-host TPU slice as demonstrated in this <a href="https://cloud.google.com/tpu/docs/v5e-inference#single-host-example">user guide</a>. This tutorial walks you through single-host model serving on GKE using the GPT-J 6B model and Saxml.</p>
+<h2 id="setup">Setup</h2>
+<h3 id="set-default-environment-variables">Set default environment variables</h3>
+<pre><code>gcloud config set project [PROJECT_ID]
+export PROJECT_ID=$(gcloud config get project)
+export REGION=[COMPUTE_REGION]
+export ZONE=[ZONE]
+</code></pre>
+<h3 id="create-gke-cluster-and-node-pool">Create GKE cluster and node pool</h3>
+<pre><code># Create zonal cluster with 2 CPU nodes
+gcloud container clusters create saxml \
+    --zone=${ZONE} \
+    --project=${PROJECT_ID} \
+    --workload-pool=${PROJECT_ID}.svc.id.goog \
+    --release-channel=rapid \
+    --num-nodes=2
+
+# Create one v5e TPU pool with topology 2x2 (1 TPU node with 4 chips)
+gcloud container node-pools create tpu \
+    --cluster=saxml \
+    --zone=${ZONE} \
+    --num-nodes=1 \
+    --machine-type=ct5lp-hightpu-4t \
+    --project=${PROJECT_ID}
+</code></pre>
+<p>You have created the following resources:
+- Standard cluster with 2 CPU nodes.
+- One v5e TPU node pool with 4 chips.</p>
+<h3 id="configure-applications-to-use-workload-identity">Configure Applications to use Workload Identity</h3>
+<p>Prequisite: make sure you have the following roles</p>
+<pre><code>roles/container.admin
+roles/iam.serviceAccountAdmin
+</code></pre>
+<p>Follow <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to">these steps</a> to configure the IAM and Kubernetes service account:</p>
+<pre><code># Get credentials for your cluster
+$ gcloud container clusters get-credentials saxml \
+    --region=${REGION}
+
+# Create a k8s service account.
+$ kubectl create serviceaccount sax-sa --namespace default
+
+# Create an IAM service account.
+$ gcloud iam service-accounts create sax-iam-sa
+
+# Ensure the IAM service account has necessary roles. Here we add roles/storage.admin for gcs bucket access.
+$ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member &quot;serviceAccount:sax-iam-sa@${PROJECT_ID}.iam.gserviceaccount.com&quot; \
+    --role roles/storage.admin
+
+# Allow the Kubernetes service account to impersonate the IAM service account
+$ gcloud iam service-accounts add-iam-policy-binding sax-iam-sa@${PROJECT_ID}.iam.gserviceaccount.com \
+    --role roles/iam.workloadIdentityUser \
+    --member &quot;serviceAccount:${PROJECT_ID}.svc.id.goog[default/sax-sa]&quot;
+
+# Annotate the Kubernetes service account with the email address of the IAM service account.
+$ kubectl annotate serviceaccount sax-sa \
+    iam.gke.io/gcp-service-account=sax-iam-sa@${PROJECT_ID}.iam.gserviceaccount.com
+</code></pre>
+<h3 id="create-a-cloud-storage-bucket-used-by-saxml">Create a Cloud Storage Bucket used by Saxml</h3>
+<p>Create a Cloud Storage bucket to store Sax admin server configurations. A running admin server will periodically save its state, including details of published models. Its network address will also be saved here and is the target address that newly started model servers will try to join. </p>
+<pre><code>SAX_ADMIN_STORAGE_BUCKET=[BUCKET_NAME]
+gcloud storage buckets create gs://${SAX_ADMIN_STORAGE_BUCKET}
+</code></pre>
+<h3 id="build-and-upload-http-server-image">Build and upload HTTP Server image</h3>
+<p>In <code>admin-server.yaml</code>, <code>model-server.yaml</code>, and <code>http-server.yaml</code>, replace the following:</p>
+<ul>
+<li><code>${SAX_ADMIN_STORAGE_BUCKET}</code> with <code>[BUCKET_NAME]</code></li>
+</ul>
+<p>Note: You can use your own HTTP server built for Saxml. To learn more, see <a href="https://github.com/GoogleCloudPlatform/ai-on-gke/tree/main/saxml-on-gke/httpserver">Inferencing using Saxml and an HTTP Server</a>.</p>
+<h2 id="deploy-saxml-admin-server-model-server-and-http-server">Deploy Saxml Admin Server, Model Server, and HTTP server</h2>
+<p>Deploy the following manifest files for the Saxml admin server, Saxml model server, HTTP server, and loadbalancer.</p>
+<pre><code>kubectl apply -f admin-server.yaml
+kubectl apply -f model-server.yaml
+kubectl apply -f http-server.yaml
+kubectl apply -f load-balancer.yaml
+</code></pre>
+<h2 id="convert-checkpoint-for-model">Convert Checkpoint for Model</h2>
+<p>Convert the GPT-J checkpoint from EleutherAI to Pax</p>
+<h3 id="create-a-gce-cpu-vm">Create a GCE CPU VM</h3>
+<p>The model checkpoint is around 21GB of memory, and the conversion script consumes around 100GB of memory, so we recommend using n2-standard-32 machine type which has around 128GB of memory. <code>python3.10</code> is also needed to install paxml, so we recommend using Ubuntu.</p>
+<pre><code>gcloud compute instances create gptj-ckpt-converter \
+  --zone=us-central1-a \
+  --machine-type=n2-standard-32 \
+  --scopes=https://www.googleapis.com/auth/cloud-platform \
+  --image=projects/ubuntu-os-cloud/global/images/ubuntu-2204-jammy-v20230919 \
+  --boot-disk-size=128GB \
+  --boot-disk-type=pd-balanced
+</code></pre>
+<h3 id="install-dependencies">Install Dependencies</h3>
+<pre><code>gcloud compute ssh gptj-ckpt-converter --zone=us-central1-a
+
+sudo apt update
+sudo apt-get install python3-pip
+sudo apt-get install git-all
+
+pip3 install accelerate
+pip3 install torch
+pip3 install transformers
+
+pip3 install paxml==1.1.0
+pip3 install jaxlib==0.4.14
+</code></pre>
+<h3 id="download-the-finetuned-gptj-6b-model">Download the finetuned GPTJ-6B Model</h3>
+<pre><code>$ PT_CHECKPOINT_PATH=./fine_tuned_pt_checkpoint
+</code></pre>
+<p>Follow the directions from here https://github.com/mlcommons/inference/blob/master/language/gpt-j/README.md#download-gpt-j-model to download the GPT-J model.</p>
+<pre><code>$ ls ${PT_CHECKPOINT_PATH}
+README.md          generation_config.json            pytorch_model-00002-of-00003.bin  special_tokens_map.json  vocab.json
+added_tokens.json  merges.txt                        pytorch_model-00003-of-00003.bin  tokenizer_config.json
+config.json        pytorch_model-00001-of-00003.bin  pytorch_model.bin.index.json      trainer_state.json
+</code></pre>
+<h3 id="convert-checkpoint">Convert checkpoint</h3>
+<p>Get the conversion script to convert the GPT-J checkpoint to SAX checkpoint</p>
+<pre><code>wget https://raw.githubusercontent.com/google/saxml/main/saxml/tools/convert_gptj_ckpt.py
+</code></pre>
+<p>Convert the weights from downloaded model to pax</p>
+<pre><code>$ ls
+convert_gptj_ckpt.py  fine_tuned_pt_checkpoint
+
+$ python3 -m convert_gptj_ckpt --base ${PT_CHECKPOINT_PATH} --pax pax_6b
+
+# This should generate content similar to the following: 
+transformer.wte.weight (50401, 4096)
+transformer.h.0.ln_1.weight (4096,)
+transformer.h.0.ln_1.bias (4096,)
+transformer.h.0.attn.k_proj.weight (4096, 4096)
+.
+.
+.
+transformer.ln_f.weight (4096,)
+transformer.ln_f.bias (4096,)
+lm_head.weight (50401, 4096)
+lm_head.bias (50401,)
+Saving the pax model to .
+done
+
+$ ls
+convert_gptj_ckpt.py  fine_tuned_pt_checkpoint  pax_6b
+</code></pre>
+<h3 id="copy-checkpoint-to-gsbucket">Copy checkpoint to GSBucket</h3>
+<p>Create another Cloud Storage bucket to store the checkpoint</p>
+<pre><code>SAX_DATA_STORAGE_BUCKET=[BUCKET_NAME]
+gcloud storage buckets create gs://${SAX_DATA_STORAGE_BUCKET}
+</code></pre>
+<pre><code>$ cd pax_6b
+$ ls checkpoint_00000000/
+metadata  state
+
+$ GS_CHECKPOINT_PATH=gs://${SAX_DATA_STORAGE_BUCKET}/path/to/checkpoint_00000000
+$ gsutil -m cp -r checkpoint_00000000 ${GS_CHECKPOINT_PATH}
+$ touch commit_success.txt
+$ gsutil cp commit_success.txt ${GS_CHECKPOINT_PATH}/
+$ gsutil cp commit_success.txt ${GS_CHECKPOINT_PATH}/metadata/
+$ gsutil cp commit_success.txt ${GS_CHECKPOINT_PATH}/state/
+</code></pre>
+<h2 id="use-saxml">Use Saxml</h2>
+<pre><code>$ kubectl get svc
+NAME          TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)                                        AGE
+sax-http-lb   LoadBalancer   10.16.14.175   10.142.0.68   8888:30191/TCP                                 3h36m
+</code></pre>
+<p>You will be able to use the EXTERNAL_IP, such as 10.142.0.68 and port 8888 to send requests to the HTTP Server.</p>
+<pre><code>$ LB_IP=$(kubectl get svc sax-http-lb -o jsonpath='{.status.loadBalancer.ingress[*].ip}')
+$ PORT=&quot;8888&quot;
+</code></pre>
+<h3 id="publish-gpt-j-6b-model">Publish GPT-J 6B Model</h3>
+<p>Replace <code>${SAX_DATA_STORAGE_BUCKET}</code> below with your bucket name</p>
+<pre><code>$ curl --request POST \
+--header &quot;Content-type: application/json&quot; \
+-s \
+${LB_IP}:${PORT}/publish \
+--data '
+{
+    &quot;model&quot;: &quot;/sax/test/gptj4bf16bs32&quot;,
+    &quot;model_path&quot;: &quot;saxml.server.pax.lm.params.gptj.GPTJ4BF16BS32&quot;,
+    &quot;checkpoint&quot;: &quot;gs://${SAX_DATA_STORAGE_BUCKET}/checkpoints/checkpoint_00000000&quot;,
+    &quot;replicas&quot;: &quot;1&quot;
+}
+'
+
+# Response
+{
+    &quot;model&quot;: &quot;/sax/test/gptj4bf16bs32&quot;,
+    &quot;model_path&quot;: &quot;saxml.server.pax.lm.params.gptj.GPTJ4BF16BS32&quot;,
+    &quot;checkpoint&quot;: &quot;gs://${SAX_DATA_STORAGE_BUCKET}/checkpoints/checkpoint_00000000&quot;,
+    &quot;replicas&quot;: &quot;1&quot;
+}
+</code></pre>
+<p>Check Model Server to ensure model has been loaded</p>
+<pre><code>$ kubectl get pods
+NAME                                READY   STATUS    RESTARTS   AGE
+sax-admin-server-5bfc75866f-4dkqv   1/1     Running   0          5d20h
+sax-http-6444cb787f-trkdw           1/1     Running   0          5d18h
+sax-model-server-bfb999969-h742s    1/1     Running   0          6m48s
+
+$ kubectl logs sax-model-server-bfb999969-h742s
+
+...
+W0905 22:09:39.180598 136507323041344 dispatch.py:254] Finished jaxpr to MLIR module conversion pjit(_wrapped_fn) in 1.5629382133483887 sec
+W0905 22:09:52.780057 136507323041344 dispatch.py:254] Finished XLA compilation of pjit(_wrapped_fn) in 13.598859310150146 sec
+I0905 22:09:56.715947 136507323041344 servable_model.py:697] loading completed.
+</code></pre>
+<h3 id="generate-a-summary">Generate a summary</h3>
+<pre><code>json_payload=$(cat  &lt;&lt; EOF
+{ 
+  &quot;model&quot;: &quot;/sax/test/gptj4bf16bs32&quot;, 
+  &quot;query&quot;: &quot;Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\nSummarize the following news article:\n\n### Input:\nMarch 10, 2015 . We're truly international in scope on Tuesday. We're visiting Italy, Russia, the United Arab Emirates, and the Himalayan Mountains. Find out who's attempting to circumnavigate the globe in a plane powered partially by the sun, and explore the mysterious appearance of craters in northern Asia. You'll also get a view of Mount Everest that was previously reserved for climbers. On this page you will find today's show Transcript and a place for you to request to be on the CNN Student News Roll Call. TRANSCRIPT . Click here to access the transcript of today's CNN Student News program. Please note that there may be a delay between the time when the video is available and when the transcript is published. CNN Student News is created by a team of journalists who consider the Common Core State Standards, national standards in different subject areas, and state standards when producing the show. ROLL CALL . For a chance to be mentioned on the next CNN Student News, comment on the bottom of this page with your school name, mascot, city and state. We will be selecting schools from the comments of the previous show. You must be a teacher or a student age 13 or older to request a mention on the CNN Student News Roll Call! Thank you for using CNN Student News!\n\n### Response:&quot;
+}
+EOF
+)
+
+curl --request POST \
+--header &quot;Content-type: application/json&quot; \
+-s \
+${LB_IP}:${PORT}/generate \
+--data &quot;$json_payload&quot;
+
+# Response
+{
+    &quot;generate_response&quot;: [
+        [
+            &quot;This page includes the show Transcript.\nUse the Transcript to help students with reading comprehension and vocabulary.\nAt the bottom of the page, comment for a chance to be mentioned on CNN Student News.  You must be a teacher or a student age 13 or older to request a mention on the CNN Student News Roll Call.&quot;,
+            -0.0309655349701643
+        ],
+        [
+            &quot;This page includes the show Transcript.\nUse the Transcript to help students with reading comprehension and vocabulary.\nAt the bottom of the page, comment for a chance to be mentioned on CNN Student News.  You must be a teacher or a student age 13 or older to request a mention on the CNN Student News Roll Call!&quot;,
+            -0.8270811438560486
+        ],
+        [
+            &quot;This page includes the show Transcript.\nUse the Transcript to help students with reading comprehension and vocabulary.\nAt the bottom of the page, comment for a chance to be mentioned on CNN Student News. You must be a teacher or a student age 13 or older to request a mention on the CNN Student News Roll Call.&quot;,
+            -1.0186288356781006
+        ],
+        [
+            &quot;This page includes the show Transcript.\nUse the Transcript to help students with reading comprehension and vocabulary.\nAt the bottom of the page, comment for a chance to be mentioned on CNN Student News.  You must be a teacher or a student age 13 or older to request a mention on the CNN Student News Roll Call.\nThe weekly Newsquiz tests students' knowledge of events in the news.&quot;,
+            -1.3383952379226685
+        ]
+    ]
+}
+</code></pre>
+<h3 id="unpublish-model">Unpublish model</h3>
+<pre><code>curl --request POST \
+--header &quot;Content-type: application/json&quot; \
+-s \
+${LB_IP}:${PORT}/unpublish \
+--data '
+{
+    &quot;model&quot;: &quot;/sax/test/gptj4bf16bs32&quot;
+}
+'
+
+# Response
+{
+    &quot;model&quot;: &quot;/sax/test/gptj4bf16bs32&quot;
+}
+</code></pre>
+<h2 id="clean-up">Clean Up</h2>
+<pre><code>gcloud container clusters delete saxml --zone=${ZONE}
+gcloud compute instances delete gptj-ckpt-converter
+gcloud iam service-accounts delete sax-iam-sa@${PROJECT_ID}.iam.gserviceaccount.com
+gcloud storage rm --recursive gs://${SAX_ADMIN_STORAGE_BUCKET}
+gcloud storage rm --recursive gs://${SAX_DATA_STORAGE_BUCKET}
+</code></pre>
+<h2 id="next-up">Next up</h2>
+<p>Learn to <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/scaling-apps">scale your application</a>.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../../js/base.js"></script>
+        <script src="../../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

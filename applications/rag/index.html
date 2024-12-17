@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>RAG on GKE - ai-on-gke</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">ai-on-gke</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">AI on GKE Assets</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../LICENSE/" class="nav-link">LICENSE</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../contributing/" class="nav-link">How to Contribute</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Applications</a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jupyter</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../jupyter/" class="dropdown-item">JupyterHub on GKE</a>
+</li>
+            
+<li>
+    <a href="../jupyter/profiles/" class="dropdown-item">JupyterHub Profiles</a>
+</li>
+            
+<li>
+    <a href="../jupyter/storage/" class="dropdown-item">Persistent Storage</a>
+</li>
+            
+<li>
+    <a href="../jupyter/variable_definitions/" class="dropdown-item">Glossary for variables</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Rag</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">RAG on GKE</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Frontend</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="frontend/" class="dropdown-item">RAG-on-GKE Frontend Webserver</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Container</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="frontend/container/" class="dropdown-item">Frontend Container</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Ray</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../ray/" class="dropdown-item">Ray on GKE Templates</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Tfvars examples</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../ray/tfvars_examples/" class="dropdown-item">Example terraform variables for Ray clusters</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Benchmarks</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../benchmarks/" class="dropdown-item">AI on GKE Benchmarking</a>
+</li>
+                                    
+<li>
+    <a href="../../benchmarks/65k-cpu-nodes-simulated-ai-benchmark/" class="dropdown-item">65k GKE CPU Benchmarks - Simulated AI Benchmark</a>
+</li>
+                                    
+<li>
+    <a href="../../benchmarks/accelerator-based-ai-benchmark/" class="dropdown-item">AI on GKE Accelerator-Based Benchmarking</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Benchmark</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../benchmarks/benchmark/" class="dropdown-item">Index</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dataset</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../benchmarks/benchmark/dataset/" class="dropdown-item">Index</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">ShareGPT v3 unflitered cleaned split</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../benchmarks/benchmark/dataset/ShareGPT_v3_unflitered_cleaned_split/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Tools</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../benchmarks/benchmark/tools/" class="dropdown-item">Index</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dlio</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../benchmarks/benchmark/tools/dlio/" class="dropdown-item">Benchmark on GKE</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Locust load inference</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../benchmarks/benchmark/tools/locust-load-inference/" class="dropdown-item">AI on GKE Benchmark Locust</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Locust custom exporter</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../benchmarks/benchmark/tools/locust-load-inference/locust-custom-exporter/" class="dropdown-item">Locust Exporter</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Model load benchmark</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../benchmarks/benchmark/tools/model-load-benchmark/" class="dropdown-item">Benchmarker CLI</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Profile generator</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../benchmarks/benchmark/tools/profile-generator/" class="dropdown-item">AI on GKE Benchmark Latency Profile Generator</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Inference server</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../benchmarks/inference-server/" class="dropdown-item">Index</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jetstream</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../benchmarks/inference-server/jetstream/" class="dropdown-item">AI on GKE Benchmarking for JetStream</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Text generation inference</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../benchmarks/inference-server/text-generation-inference/" class="dropdown-item">AI on GKE Benchmark TGI Server</a>
+</li>
+            
+<li>
+    <a href="../../benchmarks/inference-server/text-generation-inference/autoscaling/" class="dropdown-item">Autoscaling TGI</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Triton</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../benchmarks/inference-server/triton/" class="dropdown-item">AI on GKE: Benchmark TensorRT LLM on Triton Server</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Vllm</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../benchmarks/inference-server/vllm/" class="dropdown-item">Benchmark vLLM on GKE</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Infra</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Accelerator cluster</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../benchmarks/infra/accelerator-cluster/" class="dropdown-item">Index</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Stage 1</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../benchmarks/infra/accelerator-cluster/stage-1/" class="dropdown-item">AI on GKE Benchmark Infrastructure</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Modules</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gke infra</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../benchmarks/infra/accelerator-cluster/stage-1/modules/gke-infra/" class="dropdown-item">AI on GKE Benchmark Framework Infrastructure</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Stage 2</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../benchmarks/infra/accelerator-cluster/stage-2/" class="dropdown-item">AI on GKE Benchmark Infrastructure</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Orchestration</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../benchmarks/orchestration/" class="dropdown-item">AI on GKE Benchmark Framework Orchestration</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Best practices</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../best-practices/" class="dropdown-item">Best Practices</a>
+</li>
+                                    
+<li>
+    <a href="../../best-practices/startup-latency/" class="dropdown-item">Startup latency</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gke batch refarch</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../best-practices/gke-batch-refarch/" class="dropdown-item">Reference Architecture: Batch Processing Platform on GKE</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Ml platform</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../best-practices/ml-platform/" class="dropdown-item">Moved to the GoogleCloudPlatform/accelerated-platforms repository which is included as a submodule in the /best-practices folder</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Gke batch refarch</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../gke-batch-refarch/" class="dropdown-item">Moved to best-practices/gke-batch-refarch</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Infrastructure</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../infrastructure/" class="dropdown-item">Setup Infra</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Jupyter on gke</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../jupyter-on-gke/" class="dropdown-item">JupyterHub on GKE</a>
+</li>
+                                    
+<li>
+    <a href="../../jupyter-on-gke/profiles/" class="dropdown-item">JupyterHub Profiles</a>
+</li>
+                                    
+<li>
+    <a href="../../jupyter-on-gke/storage/" class="dropdown-item">Persistent Storage</a>
+</li>
+                                    
+<li>
+    <a href="../../jupyter-on-gke/variable_definitions/" class="dropdown-item">Glossary for variables</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Modules</a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Cloudsql</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../modules/cloudsql/" class="dropdown-item">CloudSQL</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Custom metrics stackdriver adapter</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../modules/custom-metrics-stackdriver-adapter/" class="dropdown-item">Custom Metrics Stackdriver Adapter</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gcs</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../modules/gcs/" class="dropdown-item">GCS bucket used in the RAG on GKE demo</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gke autopilot private cluster</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../modules/gke-autopilot-private-cluster/" class="dropdown-item">GKE Private Autopilot Cluster</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gke autopilot public cluster</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../modules/gke-autopilot-public-cluster/" class="dropdown-item">GKE Public Autopilot Cluster</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gke standard private cluster</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../modules/gke-standard-private-cluster/" class="dropdown-item">GKE Private Standard Cluster</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gke standard public cluster</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../modules/gke-standard-public-cluster/" class="dropdown-item">GKE Public Standard Cluster</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jetstream maxtext deployment</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../modules/jetstream-maxtext-deployment/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jupyter</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jupyter image</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Notebook image</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../modules/jupyter/jupyter_image/notebook_image/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Prometheus adapter</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../modules/prometheus-adapter/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Ray on gke</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../ray-on-gke/" class="dropdown-item">Ray on GKE</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Guides</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Observability</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../ray-on-gke/guides/observability/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Raytrain with gcsfusecsi</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../ray-on-gke/guides/raytrain-with-gcsfusecsi/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Tpu</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../ray-on-gke/guides/tpu/" class="dropdown-item">TPU User Guide</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Tpu</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Kuberay tpu webhook</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../ray-on-gke/tpu/kuberay-tpu-webhook/" class="dropdown-item">Index</a>
+</li>
+            
+<li>
+    <a href="../../ray-on-gke/tpu/kuberay-tpu-webhook/Troubleshooting/" class="dropdown-item">Ray TPU Webhook Troubleshooting / FAQ Guide</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Slurm on gke</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../slurm-on-gke/" class="dropdown-item">Slurm on GKE</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Tools</a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dcgm on gke</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Grafana</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Proxy</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tools/dcgm-on-gke/grafana/proxy/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gke disk image builder</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tools/gke-disk-image-builder/" class="dropdown-item">GKE Disk Image Builder</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Saxml on gke</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Httpserver</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tools/saxml-on-gke/httpserver/" class="dropdown-item">Inferencing using Saxml and an HTTP Server</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Single host inference</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gptj</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tools/saxml-on-gke/single-host-inference/gptj/" class="dropdown-item">Serve a LLM using a single-host TPU on GKE with Saxml</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Tpu provisioner</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../tpu-provisioner/" class="dropdown-item">TPU Provisioner</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Admission controller</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tpu-provisioner/admission_controller/" class="dropdown-item">TPU Provisioner Admission Controller</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Certificates</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tpu-provisioner/admission_controller/certificates/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Internal</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Auth</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gcp</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tpu-provisioner/internal/auth/gcp/" class="dropdown-item">GCP Auth (v1.26+)</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Tutorials and examples</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../tutorials-and-examples/cloudshell-tutorial/" class="dropdown-item">Cloudshell tutorial</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">genAI LLM</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">deploying mistral 7b instruct L4gpus</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/genAI-LLM/deploying-mistral-7b-instruct-L4gpus/" class="dropdown-item">Guide to Serving Mistral 7B-Instruct v0.1 on GKE Utilizing Nvidia L4-GPUs</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">deploying mixtral 8x7b instruct L4 gpus</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/genAI-LLM/deploying-mixtral-8x7b-instruct-L4-gpus/" class="dropdown-item">Guide to Serving Mixtral 8x7 Model on GKE Utilizing Nvidia L4-GPUs</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">E2e genai langchain app</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/genAI-LLM/e2e-genai-langchain-app/" class="dropdown-item">E2E GenAI application with Langchain, Ray, Flask API backend, React frontend</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Finetuning gemma 2b on l4</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/genAI-LLM/finetuning-gemma-2b-on-l4/" class="dropdown-item">Tutorial: Finetuning Gemma 2b on GKE using L4 GPUs</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Finetuning llama 7b on l4</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/genAI-LLM/finetuning-llama-7b-on-l4/" class="dropdown-item">Tutorial: Finetuning Llama 7b on GKE using L4 GPUs</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Serving llama2 70b on l4 gpus</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/genAI-LLM/serving-llama2-70b-on-l4-gpus/" class="dropdown-item">Tutorial: Serving Llama 2 70b on GKE L4 GPUs</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gpu examples</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">A100 jax</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/gpu-examples/a100-jax/" class="dropdown-item">JAX 'Hello World' on GKE + A100-80GB</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Online serving single gpu</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/gpu-examples/online-serving-single-gpu/" class="dropdown-item">Serve a model with a GPU on GKE Autopilot</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Training single gpu</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/gpu-examples/training-single-gpu/" class="dropdown-item">Train a model with GPUs on GKE Standard mode</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Hf tgi</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/hf-tgi/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Inference servers</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Checkpoints</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/inference-servers/checkpoints/" class="dropdown-item">Checkpoint conversion</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jetstream</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Maxtext</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Single host inference</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/inference-servers/jetstream/maxtext/single-host-inference/" class="dropdown-item">Serve a LLM using a single-host TPU on GKE with JetStream and MaxText</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Pytorch</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Single host inference</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/inference-servers/jetstream/pytorch/single-host-inference/" class="dropdown-item">Serve a LLM using a single-host TPU on GKE with JetStream and PyTorch/XLA</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Maxdiffusion</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/inference-servers/maxdiffusion/" class="dropdown-item">High-performance diffusion model inference on GKE and TPU using MaxDiffusion</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Kserve</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/kserve/" class="dropdown-item">KServe on GKE Autopilot</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Models as oci</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/models-as-oci/" class="dropdown-item">Package and Deploy from Hugging Face to Artifact Registry and GKE</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Nvidia nim</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/nvidia-nim/" class="dropdown-item">NVIDIA NIM on GKE</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Skypilot</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/skypilot/" class="dropdown-item">GKE cross region capacity chasing with SkyPilot</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Text classification</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/skypilot/text-classification/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Storage</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Hyperdisk ml</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/storage/hyperdisk-ml/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Tpu examples</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Single host inference</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jax</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Stable diffusion</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/tpu-examples/single-host-inference/jax/stable-diffusion/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Training</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Mnist single tpu</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/tpu-examples/training/mnist-single-tpu/" class="dropdown-item">Train a model with TPUs on GKE Standard mode</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Vector databases</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/vector-databases/readme/" class="dropdown-item">Vector Database Repo</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">NEXT 2024 Weaviate Demo</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/vector-databases/NEXT-2024-Weaviate-Demo/" class="dropdown-item">From RAG to autonomous apps with Weaviate and Gemini on Google Kubernetes Engine</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Demo website</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/vector-databases/NEXT-2024-Weaviate-Demo/demo-website/" class="dropdown-item">Demo website for Generative Feedback Loops</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Workflow orchestration</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dws examples</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/workflow-orchestration/dws-examples/" class="dropdown-item">Dynamic Workload Scheduler examples</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Indexed job</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/workflow-orchestration/indexed-job/" class="dropdown-item">Running distributed ML training workloads on GKE using Indexed Jobs</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jobset</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Pytorch</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../tutorials-and-examples/workflow-orchestration/jobset/pytorch/" class="dropdown-item">Running distributed ML training workloads on GKE using the JobSet API</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../jupyter/variable_definitions/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="frontend/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#rag-on-gke" class="nav-link">RAG on GKE</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#what-is-rag" class="nav-link">What is RAG?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#prerequisites" class="nav-link">Prerequisites</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#installation" class="nav-link">Installation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#generate-vector-embeddings-for-the-dataset" class="nav-link">Generate vector embeddings for the dataset</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#launch-the-frontend-chat-interface" class="nav-link">Launch the frontend chat interface</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#configure-authenticated-access-via-iap-recommended" class="nav-link">Configure authenticated access via IAP (recommended)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cleanup" class="nav-link">Cleanup</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="rag-on-gke">RAG on GKE</h1>
+<p>This is a sample to deploy a Retrieval Augmented Generation (RAG) application on GKE. </p>
+<p>The latest recommended release is branch release-1.1.</p>
+<h1 id="what-is-rag">What is RAG?</h1>
+<p><a href="https://cloud.google.com/blog/products/ai-machine-learning/rag-with-databases-on-google-cloud">RAG</a> is a popular approach for boosting the accuracy of LLM responses, particularly for domain specific or private data sets.</p>
+<p>RAG uses a semantically searchable knowledge base (like vector search) to retrieve relevant snippets for a given prompt to provide additional context to the LLM. Augmenting the knowledge base with additional data is typically cheaper than fine tuning and is more scalable when incorporating current events and other rapidly changing data spaces.</p>
+<h3 id="rag-on-gke-architecture">RAG on GKE Architecture</h3>
+<ol>
+<li>A GKE service endpoint serving <a href="https://huggingface.co/docs/text-generation-inference/en/index">Hugging Face TGI inference</a> using <code>mistral-7b</code>.</li>
+<li><a href="https://github.com/pgvector/pgvector">Cloud SQL <code>pgvector</code> instance</a> with vector embeddings generated from an input dataset.</li>
+<li>A <a href="https://docs.ray.io/en/latest/ray-overview/getting-started.html">Ray</a> cluster running on GKE that runs jobs to generate embeddings and populate the vector DB.</li>
+<li>A <a href="https://docs.jupyter.org/en/latest/">Jupyter</a> notebook running on GKE that reads the dataset using GCS fuse driver integrations and runs a Ray job to populate the vector DB.</li>
+<li>A front end chat interface running on GKE that prompts the inference server with context from the vector DB.</li>
+</ol>
+<p>This tutorial walks you through installing the RAG infrastructure in a GCP project, generating vector embeddings for a sample <a href="https://www.kaggle.com/datasets/shivamb/netflix-shows">Kaggle Netflix shows</a> dataset and prompting the LLM with context.</p>
+<h1 id="prerequisites">Prerequisites</h1>
+<h3 id="install-tooling-required">Install tooling (required)</h3>
+<p>Install the following on your computer:
+* <a href="https://kubernetes.io/docs/tasks/tools/#kubectl">Kubectl</a>
+* <a href="https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli">Terraform</a>
+* <a href="https://helm.sh/docs/intro/install/">Helm</a>
+* <a href="https://cloud.google.com/sdk/docs/install">Gcloud</a></p>
+<h3 id="bring-your-own-cluster-optional">Bring your own cluster (optional)</h3>
+<p>By default, this tutorial creates a cluster on your behalf. We highly recommend following the default settings.</p>
+<p>If you prefer to manage your own cluster, set <code>create_cluster = false</code> and make sure the <code>network_name</code> is set to your cluster's network in the <a href="#installation">Installation section</a>. Creating a long-running cluster may be better for development, allowing you to iterate on Terraform components without recreating the cluster every time.</p>
+<p>Use gcloud to create a GKE Autopilot cluster. Note that RAG requires the latest Autopilot features, available on the latest versions of 1.28 and 1.29.</p>
+<pre><code>gcloud container clusters create-auto rag-cluster \
+  --location us-central1 \
+  --cluster-version 1.28
+</code></pre>
+<h3 id="bring-your-own-vpc-optional">Bring your own VPC (optional)</h3>
+<p>By default, this tutorial creates a new network on your behalf with <a href="https://cloud.google.com/vpc/docs/private-service-connect">Private Service Connect</a> already enabled. We highly recommend following the default settings.</p>
+<p>If you prefer to use your own VPC, set <code>create_network = false</code> in the in the <a href="#installation">Installation section</a>. This also requires enabling <a href="https://cloud.google.com/vpc/docs/private-service-connect">Private Service Connect</a> for your VPC. Without Private Service Connect, the RAG components cannot connect to the vector DB:</p>
+<ol>
+<li>
+<p><a href="https://cloud.google.com/vpc/docs/configure-private-services-access#procedure">Create an IP allocation</a></p>
+</li>
+<li>
+<p><a href="https://cloud.google.com/vpc/docs/configure-private-services-access#creating-connection">Create a private connection</a>.</p>
+</li>
+</ol>
+<h1 id="installation">Installation</h1>
+<p>This section sets up the RAG infrastructure in your GCP project using Terraform.</p>
+<p><strong>NOTE:</strong> Terraform keeps state metadata in a local file called <code>terraform.tfstate</code>. Deleting the file may cause some resources to not be cleaned up correctly even if you delete the cluster. We suggest using <code>terraform destroy</code> before reapplying/reinstalling.</p>
+<ol>
+<li>
+<p><code>cd ai-on-gke/applications/rag</code></p>
+</li>
+<li>
+<p>Edit <code>workloads.tfvars</code> to set your project ID, location, cluster name, and GCS bucket name. Ensure the <code>gcs_bucket</code> name is globally unique (add a random suffix). Optionally, make the following changes:</p>
+<ul>
+<li>(Recommended) <a href="#configure-authenticated-access-via-iap-recommended">Enable authenticated access</a> for JupyterHub, frontend chat and Ray dashboard services.</li>
+<li>(Optional) Set a custom <code>kubernetes_namespace</code> where all k8s resources will be created.</li>
+<li>(Optional) Set <code>autopilot_cluster = false</code> to deploy using GKE Standard.</li>
+<li>(Optional) Set <code>create_cluster = false</code> if you are bringing your own cluster. If using a GKE Standard cluster, ensure it has an L4 nodepool with autoscaling and node autoprovisioning enabled. You can simplify setup by following the Terraform instructions in <a href="https://github.com/GoogleCloudPlatform/ai-on-gke/blob/main/infrastructure/README.md"><code>infrastructure/README.md</code></a>.</li>
+<li>(Optional) Set <code>create_network = false</code> if you are bringing your own VPC. Ensure your VPC has Private Service Connect enabled as described above.</li>
+</ul>
+</li>
+<li>
+<p>Run <code>terraform init</code></p>
+</li>
+<li>
+<p>Run <code>terraform apply --var-file workloads.tfvars</code></p>
+</li>
+</ol>
+<h1 id="generate-vector-embeddings-for-the-dataset">Generate vector embeddings for the dataset</h1>
+<p>This section generates the vector embeddings for your input dataset. Currently, the default dataset is <a href="https://www.kaggle.com/datasets/shivamb/netflix-shows">Netflix shows</a>. We will use a Jupyter notebook to run a Ray job that generates the embeddings &amp; populates them into the <code>pgvector</code> instance created above.</p>
+<p>Set your the namespace, cluster name and location from <code>workloads.tfvars</code>):</p>
+<pre><code>export NAMESPACE=rag
+export CLUSTER_LOCATION=us-east4
+export CLUSTER_NAME=rag-cluster
+</code></pre>
+<p>Connect to the GKE cluster:</p>
+<pre><code>gcloud container clusters get-credentials ${CLUSTER_NAME} --location=${CLUSTER_LOCATION}
+</code></pre>
+<ol>
+<li>Connect and login to JupyterHub:</li>
+<li>If IAP is disabled (<code>jupyter_add_auth = false</code>):
+        - Port forward to the JupyterHub service: <code>kubectl port-forward service/proxy-public -n ${NAMESPACE} 8081:80 &amp;</code>
+        - Go to <code>localhost:8081</code> in a browser
+        - Login with these credentials:
+            * username: admin
+            * password: use <code>terraform output jupyterhub_password</code> to fetch the password value</li>
+<li>
+<p>If IAP is enabled (<code>jupyter_add_auth = true</code>):
+        - Fetch the domain: <code>terraform output jupyterhub_uri</code>
+        - If you used a custom domain, ensure you configured your DNS as described above. 
+        - Verify the domain status is <code>Active</code>:
+            - <code>kubectl get managedcertificates jupyter-managed-cert -n ${NAMESPACE} --output jsonpath='{.status.domainStatus[0].status}'</code>
+            - Note: This can take up to 20 minutes to propagate.
+        - Once the domain status is Active, go to the domain in a browser and login with your Google credentials.
+        - To add additional users to your JupyterHub application, go to <a href="https://console.cloud.google.com/security/iap">Google Cloud Platform IAP</a>, select the <code>rag/proxy-public</code> service and add principals with the role <code>IAP-secured Web App User</code>.</p>
+</li>
+<li>
+<p>Load the notebook:</p>
+<ul>
+<li>Once logged in to JupyterHub, choose the <code>CPU</code> preset with <code>Default</code> storage. </li>
+<li>Click [File] -&gt; [Open From URL] and paste: <code>https://raw.githubusercontent.com/GoogleCloudPlatform/ai-on-gke/main/applications/rag/example_notebooks/rag-kaggle-ray-sql-interactive.ipynb</code></li>
+</ul>
+</li>
+<li>
+<p>Configure Kaggle:</p>
+<ul>
+<li>Create a <a href="https://www.kaggle.com/account/login?phase=startRegisterTab&amp;returnUrl=%2F">Kaggle account</a>.</li>
+<li><a href="https://www.kaggle.com/settings/account">Generate an API token</a>. See <a href="https://www.kaggle.com/docs/api#authentication">further instructions</a>. This token is used in the notebook to access the <a href="https://www.kaggle.com/datasets/shivamb/netflix-shows">Kaggle Netflix shows</a> dataset.</li>
+<li>Replace the variables in the 1st cell of the notebook with your Kaggle credentials (can be found in the <code>kaggle.json</code> file created while generating the API token):<ul>
+<li><code>KAGGLE_USERNAME</code></li>
+<li><code>KAGGLE_KEY</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Generate vector embeddings: Run all the cells in the notebook to generate vector embeddings for the Netflix shows dataset (https://www.kaggle.com/datasets/shivamb/netflix-shows) via a Ray job and store them in the <code>pgvector</code> CloudSQL instance.</p>
+<ul>
+<li>When the last cell succeeded, the vector embeddings have been generated and we can launch the frontend chat interface. Note that the Ray job can take up to 10 minutes to finish.</li>
+<li>Ray may take several minutes to create the runtime environment. During this time, the job will appear to be missing (e.g. <code>Status message: PENDING</code>).</li>
+<li>Connect to the Ray dashboard to check the job status or logs:<ul>
+<li>If IAP is disabled (<code>ray_dashboard_add_auth = false</code>):<ul>
+<li><code>kubectl port-forward -n ${NAMESPACE} service/ray-cluster-kuberay-head-svc 8265:8265</code></li>
+<li>Go to <code>localhost:8265</code> in a browser</li>
+</ul>
+</li>
+<li>If IAP is enabled (<code>ray_dashboard_add_auth = true</code>):<ul>
+<li>Fetch the domain: <code>terraform output ray-dashboard-managed-cert</code></li>
+<li>If you used a custom domain, ensure you configured your DNS as described above.</li>
+<li>Verify the domain status is <code>Active</code>:<ul>
+<li><code>kubectl get managedcertificates ray-dashboard-managed-cert -n ${NAMESPACE} --output jsonpath='{.status.domainStatus[0].status}'</code></li>
+<li>Note: This can take up to 20 minutes to propagate.</li>
+</ul>
+</li>
+<li>Once the domain status is Active, go to the domain in a browser and login with your Google credentials.</li>
+<li>To add additional users to your frontend application, go to <a href="https://console.cloud.google.com/security/iap">Google Cloud Platform IAP</a>, select the <code>rag/ray-cluster-kuberay-head-svc</code> service and add principals with the role <code>IAP-secured Web App User</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="launch-the-frontend-chat-interface">Launch the frontend chat interface</h1>
+<ol>
+<li>Connect to the frontend:<ul>
+<li>If IAP is disabled (<code>frontend_add_auth = false</code>):<ul>
+<li>Port forward to the frontend service: <code>kubectl port-forward service/rag-frontend -n ${NAMESPACE} 8080:8080 &amp;</code></li>
+<li>Go to <code>localhost:8080</code> in a browser</li>
+</ul>
+</li>
+<li>If IAP is enabled (<code>frontend_add_auth = true</code>):<ul>
+<li>Fetch the domain: <code>terraform output frontend_uri</code></li>
+<li>If you used a custom domain, ensure you configured your DNS as described above.</li>
+<li>Verify the domain status is <code>Active</code>:<ul>
+<li><code>kubectl get managedcertificates frontend-managed-cert -n ${NAMESPACE} --output jsonpath='{.status.domainStatus[0].status}'</code></li>
+<li>Note: This can take up to 20 minutes to propagate.</li>
+</ul>
+</li>
+<li>Once the domain status is Active, go to the domain in a browser and login with your Google credentials.</li>
+<li>To add additional users to your frontend application, go to <a href="https://console.cloud.google.com/security/iap">Google Cloud Platform IAP</a>, select the <code>rag/rag-frontend</code> service and add principals with the role <code>IAP-secured Web App User</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Prompt the LLM<ul>
+<li>Start chatting! This will fetch context related to your prompt from the vector embeddings in the <code>pgvector</code> CloudSQL instance, augment the original prompt with the context &amp; query the inference model (<code>mistral-7b</code>) with the augmented prompt.</li>
+</ul>
+</li>
+</ol>
+<h1 id="configure-authenticated-access-via-iap-recommended">Configure authenticated access via IAP (recommended)</h1>
+<p>We recommend you configure authenticated access via IAP for your services.</p>
+<p>1) Make sure the <a href="https://developers.google.com/workspace/guides/configure-oauth-consent#configure_oauth_consent">OAuth Consent Screen</a> is configured for your project. Ensure <code>User type</code> is set to <code>Internal</code>.
+2) Make sure <a href="https://cloud.google.com/load-balancing/docs/org-policy-constraints">Policy for Restrict Load Balancer Creation Based on Load Balancer Types</a> allows EXTERNAL_HTTP_HTTPS.
+3) Set the following variables in <code>workloads.tfvars</code>:
+    * <code>jupyter_add_auth = true</code>
+    * <code>frontend_add_auth = true</code>
+    * <code>ray_dashboard_add_auth = true</code>
+4) Allowlist principals for your services via <code>jupyter_members_allowlist</code>, <code>frontend_members_allowlist</code> and <code>ray_dashboard_members_allowlist</code>.
+5) Configure custom domains names via <code>jupyter_domain</code>, <code>frontend_domain</code> and <code>ray_dashboard_domain</code> for your services. 
+6) Configure DNS records for your custom domains:
+    - <a href="https://cloud.google.com/domains/docs/register-domain#registering-a-domain">Register a Domain on Google Cloud Domains</a> or use a domain registrar of your choice.
+    - Set up your DNS service to point to the public IP
+        * Run <code>terraform output frontend_ip_address</code> to get the public ip address of frontend, and add an A record in your DNS configuration to point to the public IP address.
+        * Run <code>terraform output jupyterhub_ip_address</code> to get the public ip address of jupyterhub, and add an A record in your DNS configuration to point to the public IP address.
+        * Run <code>terraform output ray_dashboard_ip_address</code> to get the public ip address of ray dashboard, and add an A record in your DNS configuration to point to the public IP address.
+    - Add an A record: If the DNS service of your domain is managed by <a href="https://cloud.google.com/dns/docs/zones">Google Cloud DNS managed zone</a>, there are two options to add the A record:
+        1. Go to https://console.cloud.google.com/net-services/dns/zones, select the zone and click ADD STANDARD, fill in your domain name and public IP address.
+        2. Run <code>gcloud dns record-sets create &lt;domain address&gt;. --zone=&lt;zone name&gt; --type="A" --ttl=&lt;ttl in seconds&gt; --rrdatas="&lt;public ip address&gt;"</code></p>
+<h1 id="cleanup">Cleanup</h1>
+<ol>
+<li>Run <code>terraform destroy --var-file="workloads.tfvars"</code><ul>
+<li>Network deletion issue: <code>terraform destroy</code> fails to delete the network due to a known issue in the GCP provider. For now, the workaround is to manually delete it.</li>
+</ul>
+</li>
+</ol>
+<h1 id="troubleshooting">Troubleshooting</h1>
+<p>Set your the namespace, cluster name and location from <code>workloads.tfvars</code>:</p>
+<pre><code>export NAMESPACE=rag
+export CLUSTER_LOCATION=us-central1
+export CLUSTER_NAME=rag-cluster
+</code></pre>
+<p>Connect to the GKE cluster:</p>
+<pre><code>gcloud container clusters get-credentials ${CLUSTER_NAME} --location=${CLUSTER_LOCATION}
+</code></pre>
+<ol>
+<li>
+<p>Troubleshoot Ray job failures:</p>
+<ul>
+<li>If the Ray actors fail to be scheduled, it could be due to a stockout or quota issue.<ul>
+<li>Run <code>kubectl get pods -n ${NAMESPACE} -l app.kubernetes.io/name=kuberay</code>. There should be a Ray head and Ray worker pod in <code>Running</code> state. If your ray pods aren't running, it's likely due to quota or stockout issues. Check that your project and selected <code>cluster_location</code> have L4 GPU capacity.</li>
+</ul>
+</li>
+<li>Often, retrying the Ray job submission (the last cell of the notebook) helps.</li>
+<li>The Ray job may take 15-20 minutes to run the first time due to environment setup.</li>
+</ul>
+</li>
+<li>
+<p>Troubleshoot IAP login issues:</p>
+<ul>
+<li>Verify the cert is Active:<ul>
+<li>For JupyterHub <code>kubectl get managedcertificates jupyter-managed-cert -n ${NAMESPACE} --output jsonpath='{.status.domainStatus[0].status}'</code></li>
+<li>For the frontend: <code>kubectl get managedcertificates frontend-managed-cert -n ${NAMESPACE} --output jsonpath='{.status.domainStatus[0].status}'</code></li>
+</ul>
+</li>
+<li>Verify users are allowlisted for JupyterHub or frontend services:<ul>
+<li>JupyterHub: Go to <a href="https://console.cloud.google.com/security/iap">Google Cloud Platform IAP</a>, select the <code>rag/proxy-public</code> service and check if the user has role <code>IAP-secured Web App User</code>.</li>
+<li>Frontend: Go to <a href="https://console.cloud.google.com/security/iap">Google Cloud Platform IAP</a>, select the <code>rag/rag-frontend</code> service and check if the user has role <code>IAP-secured Web App User</code>.</li>
+</ul>
+</li>
+<li>Org error:<ul>
+<li>The <a href="https://developers.google.com/workspace/guides/configure-oauth-consent#configure_oauth_consent">OAuth Consent Screen</a> has <code>User type</code> set to <code>Internal</code> by default, which means principals external to the org your project is in cannot log in. To add external principals, change <code>User type</code> to <code>External</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Troubleshoot <code>terraform apply</code> failures:</p>
+<ul>
+<li>Inference server (<code>mistral</code>) fails to deploy:<ul>
+<li>This usually indicates a stockout/quota issue. Verify your project and chosen <code>cluster_location</code> have L4 capacity.</li>
+</ul>
+</li>
+<li>GCS bucket already exists:<ul>
+<li>GCS bucket names have to be globally unique, pick a different name with a random suffix.</li>
+</ul>
+</li>
+<li>Cloud SQL instance already exists:<ul>
+<li>Ensure the <code>cloudsql_instance</code> name doesn't already exist in your project.</li>
+</ul>
+</li>
+<li>GMP operator webhook connection refused:<ul>
+<li>This is a rare, transient error. Run <code>terraform apply</code> again to resume deployment.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Troubleshoot <code>terraform destroy</code> failures:</p>
+<ul>
+<li>Network deletion issue:<ul>
+<li><code>terraform destroy</code> fails to delete the network due to a known issue in the GCP provider. For now, the workaround is to manually delete it.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Troubleshoot error: <code>Repo model mistralai/Mistral-7B-Instruct-v0.1 is gated. You must be authenticated to access it.</code> for the pod of deployment <code>mistral-7b-instruct</code>.</p>
+</li>
+</ol>
+<p>The error is because the RAG deployments uses <code>Mistral-7B-instruct</code> which is now a gated model on Hugging Face. Deployments fail as they require a Hugging Face authentication token, which is not part of the current workflow.
+   While we are actively working on long-term fix. This is how to workaround the error:
+    - Use <a href="https://cloud.google.com/kubernetes-engine/docs/tutorials/serve-gemma-gpu-tgi#generate-token">the guide</a> as a reference to create an access token.
+    - Go to the <a href="https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.1">model card</a> in Hugging Face and click "Agree and access repository"
+    - Create <a href="https://cloud.google.com/kubernetes-engine/docs/tutorials/serve-gemma-gpu-vllm#create_a_kubernetes_secret_for_hugging_face_credentials">a secret</a> as noted in with the Hugging Face credential called <code>hf-secret</code> in the name space where your <code>mistral-7b-instruct</code> deployment is running.
+    - Add the following entry to <code>env</code> within the deployment <code>mistral-7b-instruct</code> via <code>kubectl edit</code>.</p>
+<pre><code>        - name: HUGGING_FACE_HUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: hf-secret
+              key: hf_api_token
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

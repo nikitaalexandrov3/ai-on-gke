@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../../img/favicon.ico">
+        <title>Benchmarker CLI - ai-on-gke</title>
+        <link href="../../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../../..">ai-on-gke</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../../.." class="nav-link">AI on GKE Assets</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../../LICENSE/" class="nav-link">LICENSE</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../../contributing/" class="nav-link">How to Contribute</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Applications</a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jupyter</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../applications/jupyter/" class="dropdown-item">JupyterHub on GKE</a>
+</li>
+            
+<li>
+    <a href="../../../../applications/jupyter/profiles/" class="dropdown-item">JupyterHub Profiles</a>
+</li>
+            
+<li>
+    <a href="../../../../applications/jupyter/storage/" class="dropdown-item">Persistent Storage</a>
+</li>
+            
+<li>
+    <a href="../../../../applications/jupyter/variable_definitions/" class="dropdown-item">Glossary for variables</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Rag</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../applications/rag/" class="dropdown-item">RAG on GKE</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Frontend</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../applications/rag/frontend/" class="dropdown-item">RAG-on-GKE Frontend Webserver</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Container</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../applications/rag/frontend/container/" class="dropdown-item">Frontend Container</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Ray</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../applications/ray/" class="dropdown-item">Ray on GKE Templates</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Tfvars examples</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../applications/ray/tfvars_examples/" class="dropdown-item">Example terraform variables for Ray clusters</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Benchmarks</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../" class="dropdown-item">AI on GKE Benchmarking</a>
+</li>
+                                    
+<li>
+    <a href="../../../65k-cpu-nodes-simulated-ai-benchmark/" class="dropdown-item">65k GKE CPU Benchmarks - Simulated AI Benchmark</a>
+</li>
+                                    
+<li>
+    <a href="../../../accelerator-based-ai-benchmark/" class="dropdown-item">AI on GKE Accelerator-Based Benchmarking</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Benchmark</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../" class="dropdown-item">Index</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dataset</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../dataset/" class="dropdown-item">Index</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">ShareGPT v3 unflitered cleaned split</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../dataset/ShareGPT_v3_unflitered_cleaned_split/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Tools</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../" class="dropdown-item">Index</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dlio</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../dlio/" class="dropdown-item">Benchmark on GKE</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Locust load inference</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../locust-load-inference/" class="dropdown-item">AI on GKE Benchmark Locust</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Locust custom exporter</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../locust-load-inference/locust-custom-exporter/" class="dropdown-item">Locust Exporter</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Model load benchmark</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Benchmarker CLI</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Profile generator</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../profile-generator/" class="dropdown-item">AI on GKE Benchmark Latency Profile Generator</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Inference server</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../inference-server/" class="dropdown-item">Index</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jetstream</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../inference-server/jetstream/" class="dropdown-item">AI on GKE Benchmarking for JetStream</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Text generation inference</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../inference-server/text-generation-inference/" class="dropdown-item">AI on GKE Benchmark TGI Server</a>
+</li>
+            
+<li>
+    <a href="../../../inference-server/text-generation-inference/autoscaling/" class="dropdown-item">Autoscaling TGI</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Triton</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../inference-server/triton/" class="dropdown-item">AI on GKE: Benchmark TensorRT LLM on Triton Server</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Vllm</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../inference-server/vllm/" class="dropdown-item">Benchmark vLLM on GKE</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Infra</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Accelerator cluster</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../infra/accelerator-cluster/" class="dropdown-item">Index</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Stage 1</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../infra/accelerator-cluster/stage-1/" class="dropdown-item">AI on GKE Benchmark Infrastructure</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Modules</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gke infra</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../infra/accelerator-cluster/stage-1/modules/gke-infra/" class="dropdown-item">AI on GKE Benchmark Framework Infrastructure</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Stage 2</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../infra/accelerator-cluster/stage-2/" class="dropdown-item">AI on GKE Benchmark Infrastructure</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Orchestration</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../orchestration/" class="dropdown-item">AI on GKE Benchmark Framework Orchestration</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Best practices</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../../best-practices/" class="dropdown-item">Best Practices</a>
+</li>
+                                    
+<li>
+    <a href="../../../../best-practices/startup-latency/" class="dropdown-item">Startup latency</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gke batch refarch</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../best-practices/gke-batch-refarch/" class="dropdown-item">Reference Architecture: Batch Processing Platform on GKE</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Ml platform</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../best-practices/ml-platform/" class="dropdown-item">Moved to the GoogleCloudPlatform/accelerated-platforms repository which is included as a submodule in the /best-practices folder</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Gke batch refarch</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../../gke-batch-refarch/" class="dropdown-item">Moved to best-practices/gke-batch-refarch</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Infrastructure</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../../infrastructure/" class="dropdown-item">Setup Infra</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Jupyter on gke</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../../jupyter-on-gke/" class="dropdown-item">JupyterHub on GKE</a>
+</li>
+                                    
+<li>
+    <a href="../../../../jupyter-on-gke/profiles/" class="dropdown-item">JupyterHub Profiles</a>
+</li>
+                                    
+<li>
+    <a href="../../../../jupyter-on-gke/storage/" class="dropdown-item">Persistent Storage</a>
+</li>
+                                    
+<li>
+    <a href="../../../../jupyter-on-gke/variable_definitions/" class="dropdown-item">Glossary for variables</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Modules</a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Cloudsql</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../modules/cloudsql/" class="dropdown-item">CloudSQL</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Custom metrics stackdriver adapter</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../modules/custom-metrics-stackdriver-adapter/" class="dropdown-item">Custom Metrics Stackdriver Adapter</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gcs</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../modules/gcs/" class="dropdown-item">GCS bucket used in the RAG on GKE demo</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gke autopilot private cluster</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../modules/gke-autopilot-private-cluster/" class="dropdown-item">GKE Private Autopilot Cluster</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gke autopilot public cluster</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../modules/gke-autopilot-public-cluster/" class="dropdown-item">GKE Public Autopilot Cluster</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gke standard private cluster</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../modules/gke-standard-private-cluster/" class="dropdown-item">GKE Private Standard Cluster</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gke standard public cluster</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../modules/gke-standard-public-cluster/" class="dropdown-item">GKE Public Standard Cluster</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jetstream maxtext deployment</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../modules/jetstream-maxtext-deployment/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jupyter</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jupyter image</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Notebook image</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../modules/jupyter/jupyter_image/notebook_image/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Prometheus adapter</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../modules/prometheus-adapter/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Ray on gke</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../../ray-on-gke/" class="dropdown-item">Ray on GKE</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Guides</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Observability</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../ray-on-gke/guides/observability/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Raytrain with gcsfusecsi</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../ray-on-gke/guides/raytrain-with-gcsfusecsi/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Tpu</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../ray-on-gke/guides/tpu/" class="dropdown-item">TPU User Guide</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Tpu</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Kuberay tpu webhook</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../ray-on-gke/tpu/kuberay-tpu-webhook/" class="dropdown-item">Index</a>
+</li>
+            
+<li>
+    <a href="../../../../ray-on-gke/tpu/kuberay-tpu-webhook/Troubleshooting/" class="dropdown-item">Ray TPU Webhook Troubleshooting / FAQ Guide</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Slurm on gke</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../../slurm-on-gke/" class="dropdown-item">Slurm on GKE</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Tools</a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dcgm on gke</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Grafana</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Proxy</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tools/dcgm-on-gke/grafana/proxy/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gke disk image builder</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tools/gke-disk-image-builder/" class="dropdown-item">GKE Disk Image Builder</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Saxml on gke</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Httpserver</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tools/saxml-on-gke/httpserver/" class="dropdown-item">Inferencing using Saxml and an HTTP Server</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Single host inference</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gptj</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tools/saxml-on-gke/single-host-inference/gptj/" class="dropdown-item">Serve a LLM using a single-host TPU on GKE with Saxml</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Tpu provisioner</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../../tpu-provisioner/" class="dropdown-item">TPU Provisioner</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Admission controller</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tpu-provisioner/admission_controller/" class="dropdown-item">TPU Provisioner Admission Controller</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Certificates</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tpu-provisioner/admission_controller/certificates/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Internal</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Auth</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gcp</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tpu-provisioner/internal/auth/gcp/" class="dropdown-item">GCP Auth (v1.26+)</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Tutorials and examples</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../../../tutorials-and-examples/cloudshell-tutorial/" class="dropdown-item">Cloudshell tutorial</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">genAI LLM</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">deploying mistral 7b instruct L4gpus</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/genAI-LLM/deploying-mistral-7b-instruct-L4gpus/" class="dropdown-item">Guide to Serving Mistral 7B-Instruct v0.1 on GKE Utilizing Nvidia L4-GPUs</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">deploying mixtral 8x7b instruct L4 gpus</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/genAI-LLM/deploying-mixtral-8x7b-instruct-L4-gpus/" class="dropdown-item">Guide to Serving Mixtral 8x7 Model on GKE Utilizing Nvidia L4-GPUs</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">E2e genai langchain app</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/genAI-LLM/e2e-genai-langchain-app/" class="dropdown-item">E2E GenAI application with Langchain, Ray, Flask API backend, React frontend</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Finetuning gemma 2b on l4</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/genAI-LLM/finetuning-gemma-2b-on-l4/" class="dropdown-item">Tutorial: Finetuning Gemma 2b on GKE using L4 GPUs</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Finetuning llama 7b on l4</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/genAI-LLM/finetuning-llama-7b-on-l4/" class="dropdown-item">Tutorial: Finetuning Llama 7b on GKE using L4 GPUs</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Serving llama2 70b on l4 gpus</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/genAI-LLM/serving-llama2-70b-on-l4-gpus/" class="dropdown-item">Tutorial: Serving Llama 2 70b on GKE L4 GPUs</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Gpu examples</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">A100 jax</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/gpu-examples/a100-jax/" class="dropdown-item">JAX 'Hello World' on GKE + A100-80GB</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Online serving single gpu</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/gpu-examples/online-serving-single-gpu/" class="dropdown-item">Serve a model with a GPU on GKE Autopilot</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Training single gpu</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/gpu-examples/training-single-gpu/" class="dropdown-item">Train a model with GPUs on GKE Standard mode</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Hf tgi</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/hf-tgi/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Inference servers</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Checkpoints</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/inference-servers/checkpoints/" class="dropdown-item">Checkpoint conversion</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jetstream</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Maxtext</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Single host inference</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/inference-servers/jetstream/maxtext/single-host-inference/" class="dropdown-item">Serve a LLM using a single-host TPU on GKE with JetStream and MaxText</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Pytorch</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Single host inference</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/inference-servers/jetstream/pytorch/single-host-inference/" class="dropdown-item">Serve a LLM using a single-host TPU on GKE with JetStream and PyTorch/XLA</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Maxdiffusion</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/inference-servers/maxdiffusion/" class="dropdown-item">High-performance diffusion model inference on GKE and TPU using MaxDiffusion</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Kserve</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/kserve/" class="dropdown-item">KServe on GKE Autopilot</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Models as oci</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/models-as-oci/" class="dropdown-item">Package and Deploy from Hugging Face to Artifact Registry and GKE</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Nvidia nim</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/nvidia-nim/" class="dropdown-item">NVIDIA NIM on GKE</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Skypilot</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/skypilot/" class="dropdown-item">GKE cross region capacity chasing with SkyPilot</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Text classification</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/skypilot/text-classification/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Storage</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Hyperdisk ml</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/storage/hyperdisk-ml/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Tpu examples</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Single host inference</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jax</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Stable diffusion</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/tpu-examples/single-host-inference/jax/stable-diffusion/" class="dropdown-item">Index</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Training</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Mnist single tpu</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/tpu-examples/training/mnist-single-tpu/" class="dropdown-item">Train a model with TPUs on GKE Standard mode</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Vector databases</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/vector-databases/readme/" class="dropdown-item">Vector Database Repo</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">NEXT 2024 Weaviate Demo</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/vector-databases/NEXT-2024-Weaviate-Demo/" class="dropdown-item">From RAG to autonomous apps with Weaviate and Gemini on Google Kubernetes Engine</a>
+</li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Demo website</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/vector-databases/NEXT-2024-Weaviate-Demo/demo-website/" class="dropdown-item">Demo website for Generative Feedback Loops</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Workflow orchestration</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Dws examples</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/workflow-orchestration/dws-examples/" class="dropdown-item">Dynamic Workload Scheduler examples</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Indexed job</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/workflow-orchestration/indexed-job/" class="dropdown-item">Running distributed ML training workloads on GKE using Indexed Jobs</a>
+</li>
+    </ul>
+  </li>
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Jobset</a>
+    <ul class="dropdown-menu">
+            
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Pytorch</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../../../../tutorials-and-examples/workflow-orchestration/jobset/pytorch/" class="dropdown-item">Running distributed ML training workloads on GKE using the JobSet API</a>
+</li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../locust-load-inference/locust-custom-exporter/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../profile-generator/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#benchmarker-cli" class="nav-link">Benchmarker CLI</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#table-of-contents" class="nav-link">Table of Contents</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#architecture" class="nav-link">Architecture</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#installation" class="nav-link">Installation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#setup" class="nav-link">Setup</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#usage" class="nav-link">Usage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#examples" class="nav-link">Examples</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#plotting-results" class="nav-link">Plotting Results</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#example-plots" class="nav-link">Example Plots</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="benchmarker-cli">Benchmarker CLI</h1>
+<p>This tool is to help user iterate over different configurations for GCSFuse and benchmark the data downloading time. <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/cloud-storage-fuse-csi-driver#mounting-flags">More details on available options for gcsfuse mount options in GKE</a></p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#architecture">Architecture</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#from-source">From Source</a></li>
+<li><a href="#as-a-go-package">As a Go Package</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#commands">Commands</a></li>
+<li><a href="#examples">Examples</a></li>
+</ul>
+<h2 id="architecture">Architecture</h2>
+<p>The tool generates variety of GCSFuse mount configurations based on a configuration. The configuration parameters can contains base values, step size and max. This is used in generating all valid configurations( requested resource is less than resource limit). It also takes in pod specification, mutates it with gcsfuse configuration by configuring and mounting the csi volume. Then it deploys the pod and profiles the time  till all containers in the pod are ready. This along with the configuration is outputted to results directory. There is a <a href="plot.py">matplotlib script</a> which can be triggered to  generate scatterplots for loading times against specific configuration parameter's value</p>
+<h2 id="installation">Installation</h2>
+<h3 id="from-source">From Source</h3>
+<ol>
+<li>
+<p><strong>Clone the repository</strong>:</p>
+</li>
+<li>
+<p><strong>Build the CLI tool</strong>:
+   <code>bash
+   go build -o benchmarker</code></p>
+</li>
+<li>
+<p><strong>Move the executable</strong> (optional):
+   <code>bash
+   mv benchmarker /usr/local/bin/</code>
+   This allows you to use the <code>benchmarker</code> command globally.</p>
+</li>
+</ol>
+<h2 id="setup">Setup</h2>
+<pre><code class="language-bash">gcloud container clusters get-credentials
+</code></pre>
+<p>Ensure cluster credentials are configured in kubeconfig with gcloud credential helper. 
+The cluster must be able to scale up nodes or have existing nodes. </p>
+<h2 id="usage">Usage</h2>
+<p>The Benchmarker CLI provides commands to set configurations and run benchmarks.</p>
+<h3 id="commands">Commands</h3>
+<h4 id="config"><code>config</code></h4>
+<p>Manage configurations for benchmarks.</p>
+<ul>
+<li><strong>Usage</strong>: <code>benchmarker config [subcommand]</code></li>
+<li><strong>Subcommands</strong>:</li>
+<li><code>set</code>: Set a configuration file for benchmarks.</li>
+</ul>
+<h4 id="run"><code>run</code></h4>
+<p>Run the benchmark with the current configuration.</p>
+<ul>
+<li><strong>Usage</strong>: <code>benchmarker run</code></li>
+<li><strong>Description</strong>: Executes the benchmark process based on the specified configuration file.</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<h3 id="have-a-pod-spec-for-benchmarking">Have a pod spec for benchmarking</h3>
+<p>Create a pod spec you want to benchmark data loading time for, 
+make sure to configure Readiness probes to ensure that data expected is loaded by fuse.
+Also add necessary node selectors to ensure benchmarking pods are run on preferred nodes.
+<a href="example-pod.yaml">Example pod spec</a></p>
+<h3 id="set-a-configuration-file">Set a Configuration File</h3>
+<p>To set a configuration file named <code>config.yaml</code>, use:</p>
+<pre><code class="language-bash">benchmarker config set -f config.yaml
+</code></pre>
+<p><a href="base-config.yaml">Example config</a>. Set limits higher than base, 
+ensure the units are consistent in base and max value. Cases with Bool fields set to false and true are both generated. When file cache is not enabled, other settings are not applied. Some cases may result in failure, due to pod scheduling. Required field in configuration
+- <code>basePodSpec</code>
+- <code>volumeAttributes.bucketName</code>
+- <code>volumeAttributes.mountOptions.only-dir</code>
+Available <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/cloud-storage-fuse-csi-driver#sidecar-container-resources">SidecarResource</a> and <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/cloud-storage-fuse-csi-driver#mounting-flags">VolumeAttribute configuration fields</a></p>
+<h3 id="run-a-benchmark">Run a Benchmark</h3>
+<p>After setting the configuration, run the benchmark with:</p>
+<pre><code class="language-bash">benchmarker run
+</code></pre>
+<h2 id="plotting-results">Plotting Results</h2>
+<p>The Benchmarker CLI includes a result visualization feature to help analyze benchmark performance across different configurations. This feature loads YAML result files, extracts key metrics, and generates scatter plots for elapsed time against various configuration parameters.</p>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>Ensure you have the following Python packages installed:</p>
+<pre><code class="language-bash">pip install -r requirements.txt
+</code></pre>
+<h3 id="results-directory">Results directory</h3>
+<p>The YAML result files should be stored in a directory named <code>results</code>, with filenames following the format <code>case_&lt;number&gt;.yaml</code> (e.g., <code>case_1.yaml</code>, <code>case_2.yaml</code>).</p>
+<h3 id="running-the-plotting-script">Running the Plotting Script</h3>
+<ol>
+<li><strong>Generate YAML result files</strong> by running your benchmarks and saving the results in the <code>results</code> directory.</li>
+<li><strong>Run the plotting script</strong> to generate scatter plots:
+   <code>bash
+   python plot_results.py</code></li>
+</ol>
+<p>This script will:
+<strong>Generate Plots</strong>: Scatter plots showing elapsed time versus each parameter, saved as PNG files in the <code>results</code> directory.
+Each point on the scatter plots is labeled with the <strong>case number</strong> and its configuration is saved in <code>case_**case_number**.yaml</code></p>
+<h2 id="example-plots">Example Plots</h2>
+<h3 id="elapsed-time-vs-max-parallel-downloads">Elapsed Time vs Max Parallel Downloads</h3>
+<p><img alt="Elapsed Time vs Max Parallel Downloads" src="results/elapsed_time_vs_cpu_request.png" />
+<img alt="Elapsed Time vs Max Parallel Downloads" src="results/elapsed_time_vs_max_parallel_downloads.png" /></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../../js/base.js"></script>
+        <script src="../../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
