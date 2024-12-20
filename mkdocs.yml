@@ -1,0 +1,4 @@
+site_name: ai-on-gke
+plugins: !!python/tuple
+  - simple
+  - search
