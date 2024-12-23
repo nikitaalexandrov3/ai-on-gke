@@ -1,0 +1,22 @@
+runtime: python39
+
+handlers:
+- url: /
+  static_files: www/index.html
+  upload: www/index.html
+
+- url: /css/(.*)
+  static_files: www/css/\1
+  upload: www/css/(.*)
+
+- url: /js/(.*)
+  static_files: www/js/\1
+  upload: www/js/(.*)
+
+- url: /img/(.*)
+  static_files: www/img/\1
+  upload: www/img/(.*)
+
+- url: /(.*)
+  static_files: www/\1index.html
+  upload: www/(.*)index.html

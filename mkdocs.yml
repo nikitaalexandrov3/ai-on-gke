@@ -1,4 +1,17 @@
 site_name: ai-on-gke
-plugins: !!python/tuple
-  - simple
-  - search
+theme:
+  name: material
+plugins: 
+  - simple:
+      folders: 
+      - 'tutorials-and-examples'
+      - 'README.md'
+  - search 
+  - mike:
+      alias_type: symlink
+      redirect_template: null
+      deploy_prefix: ''
+      canonical_version: null
+      version_selector: true
+      css_dir: css
+      javascript_dir: js

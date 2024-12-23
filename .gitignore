@@ -36,3 +36,5 @@ terraform.tfstate*
 terraform.tfvars
 tfplan
 .vscode/
+/site
+/www
