@@ -1,6 +1,26 @@
 site_name: ai-on-gke
+repo_url: https://github.com/GoogleCloudPlatform/ai-on-gke
+repo_name: AI on GKE
 theme:
   name: material
+  palette: 
+
+    # Palette toggle for light mode
+    - scheme: default
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+extra_css:
+  - custom-theme/test.css
+extra_javascript:
+  - js/test.js
 plugins: 
   - simple:
       folders: 
@@ -15,3 +35,7 @@ plugins:
       version_selector: true
       css_dir: css
       javascript_dir: js
+extra:
+  version:
+    provider: mike
+    default: stable

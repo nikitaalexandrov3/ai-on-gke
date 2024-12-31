@@ -23,6 +23,8 @@ https://nikitaalexandrov3.github.io/ai-on-gke/infrastructure/
 
  https://app.readthedocs.org/dashboard/
 
+ docker build -t docsy .
+
 
 # App Engine
 Create app.yaml file
