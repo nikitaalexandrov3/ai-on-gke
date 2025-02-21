@@ -27,6 +27,7 @@ jobs:
         with:
           deliverables: docs/site/app.yaml
           project_id: ${{ secrets.GCP_PROJECT }}
+          flags: "--verbosity=debug"
           credentials: ${{ secrets.GCP_CREDENTIALS }}
 
       - name: Test
