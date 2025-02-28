@@ -10,7 +10,6 @@ dataDir: docs/site/data
 resourceDir: docs/site/resources
 assetDir: docs/site/assets
 
-
 menu:
   main:
     - name: GitHub
@@ -65,7 +64,10 @@ params:
         url: https://example.org/mail
         icon: fa fa-envelope
         desc: Discuss development issues around the project
+  taxonomy:
+    taxonomyCloud: [tags, categories]
 
+  
   offlineSearch: true
   ui:
     sidebar_menu_compact: true
