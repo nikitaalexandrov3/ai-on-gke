@@ -12,7 +12,7 @@ jobs:
       contents: 'read'
       id-token: 'write'
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Build sourcefiles
         run: |
           HOST_UID=$(id -u)
@@ -26,15 +26,19 @@ jobs:
       - id: 'auth'
         uses: 'google-github-actions/auth@v2'
         with:
-          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+          project_id: ${{ secrets.GCP_PROJECT }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+          token_format: "access_token"
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
 
       - name: Deploy to App Engine
         id: deploy
+        env: 
+         ACTIONS_STEP_DEBUG: true
         uses: google-github-actions/deploy-appengine@v2
         with:
           deliverables: docs/site/app.yaml
           project_id: ${{ secrets.GCP_PROJECT }}
-          flags: "--verbosity=debug"
 
       - name: Test
         run: curl "${{ steps.deploy.outputs.url }}"
