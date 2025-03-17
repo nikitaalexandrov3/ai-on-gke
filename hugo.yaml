@@ -1,5 +1,5 @@
 languageCode: en-us
-title: AI on GKE
+title: GKE AI Labs
 
 docsDir: docs/site
 
@@ -84,7 +84,3 @@ params:
             Glad to hear it! Please <a href="https://github.com/GoogleCloudPlatform/ai-on-gke/issues/new">tell us how we can improve</a>.
           'no': >-
             Sorry to hear that. Please <a href="https://github.com/GoogleCloudPlatform/ai-on-gke/issues/new">tell us how we can improve</a>.
-
-services:
-  googleAnalytics:
-    id: G-1TVCQM7DWD
