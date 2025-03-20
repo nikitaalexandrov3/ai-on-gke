@@ -1,9 +1,9 @@
-<!-- ---
+---
 title: "Best Practices"
 linkTitle: "Best Practices"
 weight: 30
-type: docs
+type: docs-root
 menu:
   main:
     weight: 30
---- -->
+---

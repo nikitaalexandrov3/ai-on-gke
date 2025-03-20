@@ -75,12 +75,14 @@ params:
   offlineSearch: true
   ui:
     sidebar_menu_compact: true
+    sidebar_search_disable: true
     sidebar_menu_foldable: true
     navbar_translucent_over_cover_disable: true
+    breadcrumb_disable: true
     
     # showLightDarkModeMenu: true
     feedback:
-          enable: true
+          enable: false
           # The responses that the user sees after clicking "yes" (the page was helpful) or "no" (the page was not helpful).
           'yes': >-
             Glad to hear it! Please <a href="https://github.com/GoogleCloudPlatform/ai-on-gke/issues/new">tell us how we can improve</a>.

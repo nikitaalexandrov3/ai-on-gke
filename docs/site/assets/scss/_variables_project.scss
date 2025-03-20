@@ -7,15 +7,18 @@ $google_font_name: 'Google Sans';
 $google_font_family: 'Google+Sans:300,300i,400,400i,700,700i';
 
 .td-navbar {
+  .td-navbar-nav-scroll {
+    overflow: visible!important;
+  }
 
     &.nav-backgound {
       background-color: white !important;
     }
 
     border-bottom: 0.0625rem solid #DADCE0;
-   
 
-    .nav-link {
+    .nav-item {
+      .nav-link {
         text-transform: none;
         font-weight: 500!important;
         text-align: center;
@@ -25,7 +28,31 @@ $google_font_family: 'Google+Sans:300,300i,400,400i,700,700i';
         line-height: 1.5625rem;
         letter-spacing: 0.0156rem;
         text-shadow: none!important;
+        padding-bottom: 0;
+
+
+        &.active,
+        &.show {
+          color: #1D7DB3!important;
+          font-weight: 700!important;
+        }
+
+       
       }
+
+      .indicator {
+        background: #1d7db3;
+        border-radius: 100px 100px 0px 0px;
+        align-self: stretch;
+        flex-shrink: 0;
+        height: 3px;
+        margin-top: 5px;
+        position: relative;
+      }
+    }
+   
+
+    
 
       .navbar-bg-onscroll {
         background: white !important;
@@ -144,7 +171,7 @@ $google_font_family: 'Google+Sans:300,300i,400,400i,700,700i';
 
 .section-title {
   color: var(--Grey-900, #202124);
-  font-family: "Google Sans", sans-serif!important;
+  font-family: Google Sans, sans-serif!important;
   font-size: 1.5rem!important;
   font-style: normal!important;
   font-weight: 700!important;
@@ -177,7 +204,7 @@ $google_font_family: 'Google+Sans:300,300i,400,400i,700,700i';
   flex-shrink: 0;
   height: 260px;
   padding-bottom: 2rem;
-
+  cursor: pointer;
 }
 
 .title {
@@ -369,6 +396,66 @@ section:not(:first-child).td-box {
   height: 210px!important;
   position: relative;
 }
+
+.td-content {
+  h1 {
+    color: var(--grey-900, #202124);
+    text-align: left;
+    font-family: Google Sans, sans-serif;
+    font-size: 24px;
+    letter-spacing: -0.5px;
+    font-weight: 700;
+    position: relative;
+  }
+}
+
+
+
+
+
+.entry {
+  padding: 16px 0!important;
+  display: flex;
+  flex-direction: column;
+  gap: 16px!important;
+  align-items: flex-start!important;
+
+
+  border-bottom: #dadce0 solid 1px;
+
+
+  .list-item-title {
+    color: var(--grey-900, #202124);
+    text-align: left;
+    font-family: "Roboto-SemiBold", sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.5px;
+    font-weight: 600;
+    position: relative;
+  }
+
+  p {
+    &.description {
+      color: var(--grey-900, #202124);
+      text-align: left;
+      font-family: "Roboto-Regular", sans-serif;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: -0.5px;
+      font-weight: 400;
+      position: relative;
+      margin: 0!important;
+    }
+  }
+}
+
+button {
+  height: 32px;
+  font-size: 14px!important;
+}
+
+
 
 
 

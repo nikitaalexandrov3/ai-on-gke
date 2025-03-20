@@ -2,7 +2,7 @@
 title: "Usecases"
 linkTitle: "Usecases"
 weight: 10
-type: docs
+type: docs-root
 menu:
   main:
     weight: 10

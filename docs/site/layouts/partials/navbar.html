@@ -45,6 +45,9 @@
             <span>{{ .Name }}</span>
             {{- .Post -}}
         </a>
+        {{ if $active }}
+        <div class="indicator"></div>
+        {{ end }}
       </li>
       {{ end -}}
       {{ if .Site.Params.versions -}}
@@ -64,7 +67,7 @@
       {{ end -}}
     </ul>
   </div>
-  <div class="d-sm-none d-md-block d-lg-block">
+  <div class="d-none d-sm-none d-md-none d-lg-block">
     {{ partial "search-input.html" . }}
   </div>
 </div>
