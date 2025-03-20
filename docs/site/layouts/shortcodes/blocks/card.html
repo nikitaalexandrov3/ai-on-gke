@@ -1,0 +1,13 @@
+{{ $icon_path := .Get "icon_path" -}} {{ $title := .Get "title" -}} {{
+$description := .Get "description" -}} {{ $col_id := .Get "col_id" -}}
+
+<div class="option-primary-l -bg-{{ $col_id }}">
+  <div> {{ with resources.Get $icon_path -}} {{ ( . | minify).Content | safeHTML -}}
+    {{ end -}}</div>
+ 
+  <div class="title">{{ $title }}</div>
+
+  {{ if $description -}}
+  <div class="title2">{{ $description }}</div>
+  {{ end -}}
+</div>

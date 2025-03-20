@@ -1,6 +1,6 @@
 ---
-title: "Use cases"
-linkTitle: "Use cases"
+title: "Usecases"
+linkTitle: "Usecases"
 weight: 10
 type: docs
 menu:
