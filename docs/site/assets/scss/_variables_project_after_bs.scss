@@ -3,3 +3,10 @@ $custom-colors: (
 );
 
 $theme-colors: map-merge($theme-colors, $custom-colors);
+
+
+@include media-breakpoint-up(sm) { 
+  section:first-of-type.td-box {
+    padding-top: 80px!important;
+  }
+ }
