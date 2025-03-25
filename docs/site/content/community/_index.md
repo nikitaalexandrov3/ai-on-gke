@@ -1,6 +1,6 @@
 ---
-title: "About"
-linkTitle: "About"
+title: "Contribute"
+linkTitle: "Contribute"
 menu:
   main:
     weight: 50

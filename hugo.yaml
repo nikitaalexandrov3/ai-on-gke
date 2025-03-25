@@ -10,12 +10,16 @@ dataDir: docs/site/data
 resourceDir: docs/site/resources
 assetDir: docs/site/assets
 
-# menu:
-#   main:
-#     - name: GitHub
-#       weight: 50
-#       url: 'https://github.com/GoogleCloudPlatform/ai-on-gke'
-#       pre: <i class='fa-brands fa-github'></i>
+menu:
+  main:
+    # - identifier: kubernetes
+    #   weight: 60
+    #   url: 'https://console.cloud.google.com/marketplace/product/google-cloud-platform/container-engine'
+    #   pre:  ''
+    - identifier: "github"
+      weight: 70
+      url: 'https://github.com/GoogleCloudPlatform/ai-on-gke'
+      pre: "<i class='fa-brands fa-lg fa-github'></i>"
 
 module:
   imports:

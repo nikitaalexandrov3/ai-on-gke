@@ -35,40 +35,39 @@
   <div class="col-12">
     <div class="container td-overlay__inner">
       <div class="text-center">
-        {{ with .Get "title" }}<h1 class="display-1 mt-0 mt-md-5 pb-4 pt-5">{{ $title := . }}{{ with $logo_image }}{{ $logo_image_resized := (.Fit (printf "70x70 %s" $logo_anchor)) }}<img class="td-cover-logo" src="{{ $logo_image_resized.RelPermalink }}" alt="{{ $title | html }} Logo">{{ end }}{{ $title | html }}</h1>{{ end }}
-        {{ with .Get "subtitle" }}<p class="display-2">{{ . | html }}<a class="home-link" href="https://cloud.google.com/kubernetes-engine/docs/integrations/ai-infra">Google Kubernetes Engine (GKE)</a></p>{{ end }}
-        <div class="lead">
+        <div>
+          {{ with .Get "title" }}<h1 class="display-1 mt-0 mt-md-5 pb-4 pt-5">{{ $title := . }}{{ with $logo_image }}{{ $logo_image_resized := (.Fit (printf "70x70 %s" $logo_anchor)) }}<img class="td-cover-logo" src="{{ $logo_image_resized.RelPermalink }}" alt="{{ $title | html }} Logo">{{ end }}{{ $title | html }}</h1>{{ end }}
+          {{ with .Get "subtitle" }}<p class="display-2">{{ . | html }}<a class="home-link" href="https://cloud.google.com/kubernetes-engine/docs/integrations/ai-infra">Google Kubernetes Engine (GKE)</a></p>{{ end }}  
           {{ if eq .Page.File.Ext "md" }}
               {{ .Inner | markdownify }}
           {{ else }}
               {{ .Inner | htmlUnescape | safeHTML }}
           {{ end }}
+        </div>
+       <div class="lead">
           <div class="container overflow-hidden mt-5 pb-4"> 
           <div class="row gap-3">
             <div class="col home-card">
-              {{ with resources.Get "icons/usecases.svg" -}}
-              {{ ( . | minify).Content | safeHTML -}}
-              {{ end -}}
-              <p class="home-card-title mt-3 mb-1">Explore usecases</p>
+              <div style="flex-shrink: 0;">  {{ with resources.Get "icons/usecases.svg" -}}
+                {{ ( . | minify).Content | safeHTML -}}
+                {{ end -}}</div>
+            
               <p class="home-card-description">Discover practical examples of AI deployment and scaling</p>
-              <a class="mt-auto" href="/docs/use-cases/"><button class="btn btn-primary">View</button></a>
+              <a class="mt-xl-1 mt-md-auto mt-sm-auto mt-auto" href="/docs/use-cases/"><button class="btn btn-primary">Explore usecases</button></a>
              </div>
              <div class="col home-card">
               {{ with resources.Get "icons/tutorials.svg" -}}
               {{ ( . | minify).Content | safeHTML -}}
               {{ end -}}
-              <p class="home-card-title mt-3 mb-1">Learn with tutorials</p>
               <p class="home-card-description">Follow structured tutorials to master key concepts and skills</p>
-              <a class="mt-auto" href="/docs/tutorials/"><button class="btn btn-primary">View</button></a>
+              <a class="mt-xl-1 mt-md-auto mt-sm-auto mt-auto" href="/docs/tutorials/"><button class="btn btn-primary">Learn with tutorials</button></a>
              </div>
              <div class="col home-card">
               {{ with resources.Get "icons/blueprints.svg" -}}
               {{ ( . | minify).Content | safeHTML -}}
               {{ end -}}
-              <p class="home-card-title mt-3 mb-1">Deploy blueprints</p>
               <p class="home-card-description">Quickly launch pre-configured solutions</p>
-              <a class="mt-auto" href="/docs/blueprints/"><button class="btn btn-primary">View</button></a>
-             </div></div>
+              <a class="mt-xl-1 mt-md-auto mt-sm-aut mt-auto" href="/docs/blueprints/"><button class="btn btn-primary">Deploy blueprints</button></a>
           </div>  
         </div>
       </div>

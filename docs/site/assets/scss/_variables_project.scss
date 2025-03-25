@@ -11,6 +11,10 @@ $google_font_family: 'Google+Sans:300,300i,400,400i,700,700i';
     overflow: visible!important;
   }
 
+  .navbar-nav {
+    padding-bottom: 0!important;
+  }
+
     &.nav-backgound {
       background-color: white !important;
     }
@@ -89,7 +93,7 @@ $google_font_family: 'Google+Sans:300,300i,400,400i,700,700i';
 
 #td-cover-block-0 {
   padding: 0 !important;
-  background-size: 50vh 50vh;
+  background-size: 85vh;
   background-position: bottom right;
   background-repeat: no-repeat;
 }
@@ -147,6 +151,8 @@ $google_font_family: 'Google+Sans:300,300i,400,400i,700,700i';
   flex-direction: column;
   align-items: flex-start;
   flex-grow: 1;
+  min-height: 235px;
+  flex-shrink: 0;
 }
 
 .home-card-title {
@@ -167,6 +173,8 @@ $google_font_family: 'Google+Sans:300,300i,400,400i,700,700i';
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  margin-top: 16px;
+  margin-bottom: 10px;
 }
 
 
@@ -203,7 +211,7 @@ $google_font_family: 'Google+Sans:300,300i,400,400i,700,700i';
   align-items: flex-start;
   justify-content: flex-start;
   flex-shrink: 0;
-  height: 260px;
+  height: 300px;
   padding-bottom: 2rem;
   cursor: pointer;
 }
@@ -455,6 +463,16 @@ button {
   height: 32px;
   font-size: 14px!important;
 }
+
+
+.text-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 0 3rem 0;
+}
+
+
 
 
 
