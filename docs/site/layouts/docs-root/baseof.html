@@ -15,10 +15,6 @@
         <div class="row flex-xl-nowrap">
             <div class="col"><main class="col-12" role="main">
                 {{ partial "version-banner.html" . }}
-                {{ if not (.Param "ui.breadcrumb_disable") -}}
-                  {{ partial "breadcrumb.html" . -}}
-                {{ end -}}
-
                 {{ block "main" . }}{{ end }}
               </main></div>
           

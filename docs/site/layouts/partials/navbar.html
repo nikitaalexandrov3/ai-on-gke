@@ -22,7 +22,7 @@
     </span>
     {{- /**/ -}}
   </a>
-  <div class="td-navbar-nav-scroll ms-md-auto" id="main_navbar">
+  <div class="td-navbar-nav-scroll" id="main_navbar">
     <ul class="navbar-nav">
       {{ $p := . -}}
       {{ range .Site.Menus.main -}}
@@ -49,6 +49,7 @@
         <div class="indicator"></div>
         {{ end }}
       </li>
+     
       {{ end -}}
       {{ if .Site.Params.versions -}}
       <li class="nav-item dropdown d-none d-lg-block">
@@ -67,8 +68,12 @@
       {{ end -}}
     </ul>
   </div>
-  <div class="d-none d-sm-none d-md-none d-lg-block">
-    {{ partial "search-input.html" . }}
-  </div>
+  <div style="display: flex;"> {{ if .IsHome }}
+    {{ partial "nav-icons.html" . }}
+    {{ end }}
+    <div class="d-none d-sm-none d-md-none d-lg-block">
+      {{ partial "search-input.html" . }}
+    </div></div>
+ 
 </div>
 </nav>

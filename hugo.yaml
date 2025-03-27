@@ -9,23 +9,15 @@ layoutDir: docs/site/layouts
 dataDir: docs/site/data
 resourceDir: docs/site/resources
 assetDir: docs/site/assets
+i18nDir: docs/site/i18n
 
-menu:
-  main:
-    # - identifier: kubernetes
-    #   weight: 60
-    #   url: 'https://console.cloud.google.com/marketplace/product/google-cloud-platform/container-engine'
-    #   pre:  ''
-    - identifier: "github"
-      weight: 70
-      url: 'https://github.com/GoogleCloudPlatform/ai-on-gke'
-      pre: "<i class='fa-brands fa-lg fa-github'></i>"
+
 
 module:
   imports:
     - path: github.com/google/docsy
 params:
-  # github_repo: https://github.com/nikitaalexandrov3/ai-on-gke
+  github_repo: https://github.com/nikitaalexandrov3/ai-on-gke
   path_base_for_github_subdir: docs/website
   github_branch: website
   github_project_repo: https://github.com/nikitaalexandrov3/ai-on-gke
@@ -72,6 +64,8 @@ params:
         desc: Discuss development issues around the project
   taxonomy:
     taxonomyCloud: [tags, categories]
+    taxonomyCloudTitle: 
+      - Categories
     taxonomyPageHeader: [tags]
   maxRelativeArticlesToDisplay: 5
 
@@ -79,10 +73,10 @@ params:
   offlineSearch: true
   ui:
     sidebar_menu_compact: true
-    sidebar_search_disable: true
+    sidebar_search_disable: false
     sidebar_menu_foldable: true
     navbar_translucent_over_cover_disable: true
-    breadcrumb_disable: true
+    breadcrumb_disable: false
     
     # showLightDarkModeMenu: true
     feedback:
