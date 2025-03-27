@@ -1,3 +1,4 @@
+{{ define "main" }}
 <div class="td-content">
 	<h1>{{ .Title }}</h1>
 	<header class="article-meta">
@@ -8,12 +9,12 @@
 	</header>
 	{{ .Render "td-content-after-header" -}}
 	{{ .Content }}
-    {{ partial "tags.html" . -}}
+	{{ partial "section-index.html" . -}}
 	{{ partial "feedback.html" . -}}
 	{{ if (.Site.Config.Services.Disqus.Shortname) -}}
 		<br />
 		{{- partial "disqus-comment.html" . -}}
 	{{ end -}}
-	{{ partial "page-meta-lastmod.html" . }}
+	{{ partial "page-meta-lastmod.html" . -}}
 </div>
-{{/**/ -}}
+{{ end -}}

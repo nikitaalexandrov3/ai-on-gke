@@ -1,6 +1,6 @@
 ---
-title: "AI on GKE"
-linkTitle: "AI on GKE"
+title: "GKE AI Labs"
+linkTitle: "GKE AI Labs"
 weight: 20
 type: docs
 ---
