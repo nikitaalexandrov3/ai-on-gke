@@ -12,7 +12,11 @@ assetDir: docs/site/assets
 i18nDir: docs/site/i18n
 staticDir: docs/site/static
 
-
+markup:
+  goldmark:
+    parser:
+      attribute:
+        block: true
 
 
 module:
